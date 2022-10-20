@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "payments",
+  "info": {
+    "singularName": "payment",
+    "pluralName": "payments",
+    "displayName": "payment"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "order": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::order.order",
+      "inversedBy": "payment"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "COD",
+        "ONLINE"
+      ],
+      "default": "COD",
+      "required": true
+    },
+    "status": {
+      "type": "boolean"
+    },
+    "trastion_id": {
+      "type": "string"
+    }
+  }
+}
