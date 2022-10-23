@@ -1,6 +1,10 @@
 import Head from 'next/head'
+import Brand from '../components/home/Brand'
+import Product from '../components/home/Product'
+import Review from '../components/home/Review'
 import Slide from '../components/home/slides'
-import { Container } from '../components/styles/Container.styles'
+import Topbar from '../components/shared/Topbar'
+import { Container } from '../components/styles/Container.styled'
 
 export default function Home() {
   return (
@@ -11,7 +15,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <Topbar></Topbar>
+
       <Slide></Slide>
+      <Brand></Brand>
+      <Product></Product>
+      <Review></Review>
         
     </Container>
   )

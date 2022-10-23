@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Content = styled.div`
   border: 1px solid #000;
   background-image: url(${props => props.imagePath});
+  background-color: #F0F2F3;
   max-width: 100%;
   height: 400px;
   background-size: contain;

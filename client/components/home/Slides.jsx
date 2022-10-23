@@ -21,7 +21,7 @@ const Slide = () => {
             <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
                 {
                     slideLength?.map((slide, i) => <SwiperSlide id={i}>
-                        <Content imagePath='./slides/slide3.png'>
+                        <Content imagePath='./slides/slide3.png' bg="#F0F2F3">
                             {/* <FlexCenterD> */}
                                 <h1>Best medicine for your covid problem.</h1>
                                 <Button bg="#029FAE" maxW="30%">Shop Now <FiArrowRight></FiArrowRight></Button>
