@@ -57,3 +57,19 @@ export const FlexContentSpace = styled.div`
     }
 
 `
+
+export const FlexContentAround = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    ul {
+        list-style: none;
+        display: flex;
+    }
+
+    a {
+        margin: 0 10px;
+        font-family: 'Roboto', sans-sarif;
+    }
+`

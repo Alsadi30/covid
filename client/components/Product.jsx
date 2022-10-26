@@ -1,8 +1,8 @@
 import React from 'react';
-import products from '../../staticData/products';
-import { GridLayout } from '../styles/Grid.styled';
+import products from '../staticData/products';
+import { GridLayout } from './styles/Grid.styled';
 import { BsFillCartPlusFill } from 'react-icons/bs';
-import { FlexContentSpace } from '../styles/Flex.styled';
+import { FlexContentSpace } from './styles/Flex.styled';
 
 const Product = () => {
     return (
