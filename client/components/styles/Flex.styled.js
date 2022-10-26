@@ -8,6 +8,7 @@ export const FlexCenter = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: ${(props) => props.direction ? props.direction : ''};
 `
 
 export const FlexCenterD = styled.div`
