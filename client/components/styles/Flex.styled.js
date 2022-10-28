@@ -8,6 +8,7 @@ export const FlexCenter = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: ${(props) => props.direction ? props.direction : ''};
 `
 
 export const FlexCenterD = styled.div`
@@ -56,4 +57,20 @@ export const FlexContentSpace = styled.div`
         outline: none;
     }
 
+`
+
+export const FlexContentAround = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    ul {
+        list-style: none;
+        display: flex;
+    }
+
+    a {
+        margin: 0 10px;
+        font-family: 'Roboto', sans-sarif;
+    }
 `

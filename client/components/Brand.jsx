@@ -1,5 +1,5 @@
-import brands from "../../staticData/brand";
-import { FlexContentSpace } from "../styles/Flex.styled";
+import brands from "../staticData/brand";
+import { FlexContentSpace } from "./styles/Flex.styled";
 import BrandStyle from "./BrandStyle";
 
 const Brand = () => {
