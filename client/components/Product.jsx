@@ -10,7 +10,7 @@ const Product = () => {
             <h2>On Sale Products</h2>
             <GridLayout>
                 {
-                    products?.map(product => <div style={{padding: '0 20px'}}>
+                    products?.map(product => <div style={{padding: '0 20px'}} key={product?.id}>
                         <img src={product?.image} alt={product?.title}></img>
                         <FlexContentSpace>
                             <div>

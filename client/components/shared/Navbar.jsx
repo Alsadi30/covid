@@ -13,8 +13,8 @@ const Navbar = () => {
 
                 <ul>
                     {
-                        items.map(item =>
-                            <li>
+                        items?.map((item, i) =>
+                            <li key={i}>
                                 <a href='#'>{item}</a>
                             </li>
                         )
