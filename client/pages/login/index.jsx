@@ -2,8 +2,14 @@ import Head from "next/head";
 import { useForm } from "react-hook-form";
 import Navbar from "../../components/shared/Navbar";
 import Topbar from "../../components/shared/Topbar";
-import { Container } from "../../components/styles/Container.styled";
+import { AuthBox, Container } from "../../components/styles/Container.styled";
 import { FlexCenter } from "../../components/styles/Flex.styled";
+import ButtonInput from "../../components/UI/ButtonInput";
+import TextInput from "../../components/UI/TextInput";
+import { BsArrowRight } from 'react-icons/bs';
+import styled from "styled-components";
+import { Error } from "../../components/UI/Error";
+
 
 const Login = () => {
 
@@ -16,7 +22,7 @@ const Login = () => {
 
     const onSubmit = (data) => {
         console.log(data);
-    }; // your form submit function which will invoke after successful validation
+    };
 
     console.log(watch("example"));
 
@@ -33,19 +39,15 @@ const Login = () => {
 
                 <FlexCenter>
 
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        {/* register your input into the hook by invoking the "register" function */}
-                        <input defaultValue="test" {...register("example")} />
-                        <br></br>
+                    <AuthBox onSubmit={handleSubmit(onSubmit)}>
+                        <TextInput {...register("email", { required: "Email is Required." })} placeholder="Email" type="email"/>
+                        {errors.email && <Error>Email is required</Error>}
+                        
+                        <TextInput {...register("password", { required: "Password is Required." })} placeholder="Password" type="password"/>
+                        {errors.password && <Error>Password is required</Error>}
 
-                        {/* include validation with required or other standard HTML validation rules */}
-                        <input {...register("exampleRequired", { required: true })} />
-                        {/* errors will return when field validation fails  */}
-                        {errors.exampleRequired && <p>This field is required</p>}
-                        <br></br>
-
-                        <input type="submit" />
-                    </form>
+                        <ButtonInput type="submit"  value={`Sign In`}/>
+                    </AuthBox>
 
                 </FlexCenter>
 
