@@ -9,7 +9,8 @@ import TextInput from "../../components/UI/TextInput";
 import { BsArrowRight } from 'react-icons/bs';
 import styled from "styled-components";
 import { Error } from "../../components/UI/Error";
-import {AuthBackEndApi} from "../../api/api";
+import { AuthBackEndApi } from "../../api/api";
+import Link from 'next/link';
 
 
 const Register = () => {
@@ -24,8 +25,8 @@ const Register = () => {
     const onSubmit = (data) => {
         if (data.password !== data.confirmPassword) {
             console.log("Passwords don't match");
-        }else{
-            AuthBackEndApi.post('/register',{
+        } else {
+            AuthBackEndApi.post('/register', {
                 username: data.name,
                 email: data.email,
                 password: data.password,
@@ -65,7 +66,7 @@ const Register = () => {
                         <TextInput {...register("email", { required: "Email is Required." })} placeholder="Email" type="email" />
                         {errors.email && <Error>Email is required</Error>}
 
-                        <TextInput {...register("phone", { required: "Phone is Required." })} placeholder="Phone" type="text"/>
+                        <TextInput {...register("phone", { required: "Phone is Required." })} placeholder="Phone" type="text" />
                         {errors.email && <Error>Email is required</Error>}
 
                         <TextInput {...register("password", { required: "Password is Required." })} placeholder="Password" type="password" />
@@ -75,6 +76,14 @@ const Register = () => {
                         {errors.password && <Error>Password is required</Error>}
 
                         <ButtonInput type="submit" value={`Sign Up`} />
+
+                        <FlexCenter>
+                            <p style={{ fontSize: '16px' }}>Already have an account?</p>
+                            <Link href="/login">
+                                <a style={{ fontSize: '16px', marginLeft: '5px' }}>Login</a>
+                            </Link>
+                        </FlexCenter>
+
                     </AuthBox>
 
                 </FlexCenter>
