@@ -26,9 +26,8 @@ const Login = () => {
 
    const {LogIn} = useStoreActions(actions => actions.Auth);
 
-    const onSubmit = (data) => {
-       LogIn(data);
-        router.push('/');
+    const onSubmit = async (data) => {
+        await LogIn(data) && router.push('/');
 
     };
 
