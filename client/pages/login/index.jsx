@@ -12,9 +12,11 @@ import { Error } from "../../components/UI/Error";
 
 import {AuthBackEndApi} from "../../api/api";
 import {useStoreActions, useStoreState} from "easy-peasy";
+import {useRouter} from "next/router";
 
 
 const Login = () => {
+    const router = useRouter()
 
     const {
         register,
@@ -22,18 +24,11 @@ const Login = () => {
         formState: { errors }
     } = useForm();
 
-   const {AuthSet} = useStoreActions(actions => actions.Auth);
- const {AuthToken,AuthUser}=   useStoreState(state => state.Auth);
+   const {LogIn} = useStoreActions(actions => actions.Auth);
 
     const onSubmit = (data) => {
-        AuthBackEndApi.post('/',{
-            identifier: data.email,
-            password: data.password
-        }).then(r => {
-            AuthSet({token:r.data.jwt,user:r.data.user});
-        }).catch(e => {
-            console.log(e);
-        })
+       LogIn(data);
+        router.push('/');
 
     };
 
@@ -52,8 +47,8 @@ const Login = () => {
                 <FlexCenter>
 
                     <AuthBox onSubmit={handleSubmit(onSubmit)}>
-                        <TextInput {...register("email", { required: "Email is Required." })} placeholder="Email" type="text"/>
-                        {errors.email && <Error>Email or User Name is required</Error>}
+                        <TextInput {...register("email", { required: "Email or UserName is Required." })} placeholder="Email" type="text"/>
+                        {errors.email && <Error>Email or UserName is required</Error>}
                         
                         <TextInput {...register("password", { required: "Password is Required." })} placeholder="Password" type="password"/>
                         {errors.password && <Error>Password is required</Error>}

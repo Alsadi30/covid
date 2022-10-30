@@ -16,7 +16,7 @@ import {useStoreActions} from "easy-peasy";
 
 const Register = () => {
     const router = useRouter()
-    const {AuthSet} = useStoreActions(actions => actions.Auth);
+    const {Register} = useStoreActions(actions => actions.Auth);
 
     const {
         register,
@@ -29,21 +29,9 @@ const Register = () => {
         if (data.password !== data.confirmPassword) {
             console.log("Passwords don't match");
         }else{
-            AuthBackEndApi.post('/register',{
-                username: data.name,
-                email: data.email,
-                password: data.password,
-                phone: data.phone
-            }).then(r => {
-                AuthSet({token:r.data.jwt,user:r.data.user});
-                router.push('/');
-
-            }).catch(e => {
-                console.log(e);
-            });
+            Register(data);
+            router.push('/');
         }
-
-
     }
 
     return (
