@@ -1,8 +1,8 @@
 import React from 'react';
-import products from '../../staticData/products';
-import { GridLayout } from '../styles/Grid.styled';
+import products from '../staticData/products';
+import { GridLayout } from './styles/Grid.styled';
 import { BsFillCartPlusFill } from 'react-icons/bs';
-import { FlexContentSpace } from '../styles/Flex.styled';
+import { FlexContentSpace } from './styles/Flex.styled';
 
 const Product = () => {
     return (
@@ -10,7 +10,7 @@ const Product = () => {
             <h2>On Sale Products</h2>
             <GridLayout>
                 {
-                    products?.map(product => <div style={{padding: '0 20px'}}>
+                    products?.map(product => <div style={{padding: '0 20px'}} key={product?.id}>
                         <img src={product?.image} alt={product?.title}></img>
                         <FlexContentSpace>
                             <div>

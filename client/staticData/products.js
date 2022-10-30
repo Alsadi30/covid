@@ -35,7 +35,7 @@ const products = [
         image: '/product/procare.png'
     },
     {
-        id: 1,
+        id: 6,
         title: 'Sepnil Cool Hanitizer',
         prevPrice: 20,
         currentPrice: 10,

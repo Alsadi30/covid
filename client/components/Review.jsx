@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid } from '../styles/Grid.styled';
+import { Grid } from './styles/Grid.styled';
 
 const Review = () => {
     return (
