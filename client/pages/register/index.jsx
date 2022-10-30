@@ -29,8 +29,7 @@ const Register = () => {
         if (data.password !== data.confirmPassword) {
             console.log("Passwords don't match");
         }else{
-            Register(data);
-            router.push('/');
+            Register(data)
         }
     }
 
