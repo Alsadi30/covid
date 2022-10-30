@@ -25,11 +25,11 @@ const Register = () => {
         formState: { errors }
     } = useForm();
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         if (data.password !== data.confirmPassword) {
             console.log("Passwords don't match");
-        }else{
-            Register(data)
+        } else {
+            await Register(data) && router.push('/');
         }
     }
 
