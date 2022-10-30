@@ -19,7 +19,6 @@ const Login = () => {
     const {
         register,
         handleSubmit,
-        watch,
         formState: { errors }
     } = useForm();
 
@@ -60,7 +59,7 @@ const Login = () => {
                         {errors.password && <Error>Password is required</Error>}
 
                         <ButtonInput type="submit"  value={`Sign In`}/>
-                        {AuthToken&& <h1>{ AuthUser.username}</h1>}
+
                     </AuthBox>
 
                 </FlexCenter>

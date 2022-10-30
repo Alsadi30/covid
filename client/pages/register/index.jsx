@@ -10,9 +10,13 @@ import { BsArrowRight } from 'react-icons/bs';
 import styled from "styled-components";
 import { Error } from "../../components/UI/Error";
 import {AuthBackEndApi} from "../../api/api";
+import { useRouter } from 'next/router'
+import {useStoreActions} from "easy-peasy";
 
 
 const Register = () => {
+    const router = useRouter()
+    const {AuthSet} = useStoreActions(actions => actions.Auth);
 
     const {
         register,
@@ -31,8 +35,9 @@ const Register = () => {
                 password: data.password,
                 phone: data.phone
             }).then(r => {
-                console.log('User profile', r.data.user);
-                console.log('User token', r.data.jwt);
+                AuthSet({token:r.data.jwt,user:r.data.user});
+                router.push('/');
+
             }).catch(e => {
                 console.log(e);
             });
@@ -40,9 +45,6 @@ const Register = () => {
 
 
     }
-
-
-    console.log(watch("example"));
 
     return (
         <>
