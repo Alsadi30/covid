@@ -9,6 +9,7 @@ import TextInput from "../../components/UI/TextInput";
 import { BsArrowRight } from 'react-icons/bs';
 import styled from "styled-components";
 import { Error } from "../../components/UI/Error";
+import {AuthBackEndApi} from "../../api/api";
 
 
 const Register = () => {
@@ -21,8 +22,25 @@ const Register = () => {
     } = useForm();
 
     const onSubmit = (data) => {
-        console.log(data);
-    };
+        if (data.password !== data.confirmPassword) {
+            console.log("Passwords don't match");
+        }else{
+            AuthBackEndApi.post('/register',{
+                username: data.name,
+                email: data.email,
+                password: data.password,
+                phone: data.phone
+            }).then(r => {
+                console.log('User profile', r.data.user);
+                console.log('User token', r.data.jwt);
+            }).catch(e => {
+                console.log(e);
+            });
+        }
+
+
+    }
+
 
     console.log(watch("example"));
 

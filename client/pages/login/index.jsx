@@ -10,6 +10,9 @@ import { BsArrowRight } from 'react-icons/bs';
 import styled from "styled-components";
 import { Error } from "../../components/UI/Error";
 
+import {AuthBackEndApi} from "../../api/api";
+import {useStoreActions, useStoreState} from "easy-peasy";
+
 
 const Login = () => {
 
@@ -20,11 +23,21 @@ const Login = () => {
         formState: { errors }
     } = useForm();
 
+   const {AuthSet} = useStoreActions(actions => actions.Auth);
+ const {AuthToken,AuthUser}=   useStoreState(state => state.Auth);
+
     const onSubmit = (data) => {
-        console.log(data);
+        AuthBackEndApi.post('/',{
+            identifier: data.email,
+            password: data.password
+        }).then(r => {
+            AuthSet({token:r.data.jwt,user:r.data.user});
+        }).catch(e => {
+            console.log(e);
+        })
+
     };
 
-    console.log(watch("example"));
 
     return (
         <>
@@ -40,13 +53,14 @@ const Login = () => {
                 <FlexCenter>
 
                     <AuthBox onSubmit={handleSubmit(onSubmit)}>
-                        <TextInput {...register("email", { required: "Email is Required." })} placeholder="Email" type="email"/>
-                        {errors.email && <Error>Email is required</Error>}
+                        <TextInput {...register("email", { required: "Email is Required." })} placeholder="Email" type="text"/>
+                        {errors.email && <Error>Email or User Name is required</Error>}
                         
                         <TextInput {...register("password", { required: "Password is Required." })} placeholder="Password" type="password"/>
                         {errors.password && <Error>Password is required</Error>}
 
                         <ButtonInput type="submit"  value={`Sign In`}/>
+                        {AuthToken&& <h1>{ AuthUser.username}</h1>}
                     </AuthBox>
 
                 </FlexCenter>
