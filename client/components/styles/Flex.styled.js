@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+export const Stack = styled.div`
+    display: flex;
+
+`
+
 export const Flex = styled.div`
     display: flex;
     align-items: center;
@@ -8,6 +13,13 @@ export const FlexCenter = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: ${(props) => props.direction ? props.direction : ''};
+`
+
+export const FlexEnd = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
     flex-direction: ${(props) => props.direction ? props.direction : ''};
 `
 
@@ -21,7 +33,8 @@ export const FlexContentSpace = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: ${(props) => props.bg ? props.bg : ''}
+    background-color: ${(props) => props.bg ? props.bg : ''};
+    padding: 15px 50px;
 
     img {
         max-width: 100%;
@@ -47,10 +60,11 @@ export const FlexContentSpace = styled.div`
     }
 
     input {
-        padding: 10px 5px;
-        width: 250px;
+        padding: 8px 5px;
+        width: 350px;
         border-radius: 7px;
         border: 1px solid #cbcdd4;
+        font-size: 16px;
     }
 
     input:focus {
@@ -63,14 +77,20 @@ export const FlexContentAround = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 20px 50px 10px 50px;
 
     ul {
-        list-style: none;
         display: flex;
+        list-style: none;
     }
 
     a {
         margin: 0 10px;
         font-family: 'Roboto', sans-sarif;
+        color: black;
+
+        &:hover {
+            color: #029FAE;
+        }
     }
 `

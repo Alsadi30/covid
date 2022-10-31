@@ -3,12 +3,13 @@ import { useForm } from "react-hook-form";
 import Navbar from "../../components/shared/Navbar";
 import Topbar from "../../components/shared/Topbar";
 import { AuthBox, Container } from "../../components/styles/Container.styled";
-import { FlexCenter } from "../../components/styles/Flex.styled";
+import { Flex, FlexCenter } from "../../components/styles/Flex.styled";
 import ButtonInput from "../../components/UI/ButtonInput";
 import TextInput from "../../components/UI/TextInput";
 import { BsArrowRight } from 'react-icons/bs';
 import styled from "styled-components";
 import { Error } from "../../components/UI/Error";
+import Link from 'next/link';
 
 import {AuthBackEndApi} from "../../api/api";
 import {useStoreActions, useStoreState} from "easy-peasy";
@@ -46,14 +47,20 @@ const Login = () => {
                 <FlexCenter>
 
                     <AuthBox onSubmit={handleSubmit(onSubmit)}>
-                        <TextInput {...register("email", { required: "Email or UserName is Required." })} placeholder="Email" type="text"/>
-                        {errors.email && <Error>Email or UserName is required</Error>}
-                        
-                        <TextInput {...register("password", { required: "Password is Required." })} placeholder="Password" type="password"/>
+                        <TextInput {...register("email", { required: "Email is Required." })} placeholder="Email" type="text" />
+                        {errors.email && <Error>Email or User Name is required</Error>}
+
+                        <TextInput {...register("password", { required: "Password is Required." })} placeholder="Password" type="password" />
                         {errors.password && <Error>Password is required</Error>}
 
-                        <ButtonInput type="submit"  value={`Sign In`}/>
-
+                        <ButtonInput type="submit" value={`Sign In`} />
+                        {/* {AuthToken && <h1>{AuthUser.username}</h1>} */}
+                        <FlexCenter>
+                            <p style={{ fontSize: '16px' }}>Don't have an account?</p>
+                            <Link href="/register">
+                                <a style={{ fontSize: '16px', marginLeft: '5px' }}>Register</a>
+                            </Link>
+                        </FlexCenter>
                     </AuthBox>
 
                 </FlexCenter>

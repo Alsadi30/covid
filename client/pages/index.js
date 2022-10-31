@@ -10,6 +10,7 @@ import Navbar from '../components/shared/Navbar'
 export default function Home() {
   return (
     <>
+      <Topbar></Topbar>
       <Navbar></Navbar>
       <Container>
         <Head>
@@ -18,7 +19,6 @@ export default function Home() {
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
-        <Topbar></Topbar>
 
         <Slide></Slide>
         <Brand></Brand>
