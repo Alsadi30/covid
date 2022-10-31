@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { useState } from 'react';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { CgProfile } from 'react-icons/cg';
@@ -16,9 +17,9 @@ const Topbar = () => {
     return (
         <>
             <FlexContentSpace bg='#F0F2F3'>
-                <div>
-                    <h3>Covid 19 Shop</h3>
-                </div>
+                <Link href="/">
+                    <h3 style={{ cursor: 'pointer' }}>Covid 19 Shop</h3>
+                </Link>
 
                 <div>
                     <input type="search" placeholder='Search here..'></input>

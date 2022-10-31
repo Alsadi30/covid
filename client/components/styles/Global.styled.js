@@ -14,6 +14,8 @@ const GlobalStyles = createGlobalStyle`
 
   p {
     line-height: 1.2;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 
   img {
