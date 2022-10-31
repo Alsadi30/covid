@@ -1,7 +1,7 @@
 import React from 'react';
-import { Grid } from './styles/Grid.styled';
+import { Grid } from '../styles/Grid.styled';
 
-const Review = () => {
+const ReviewCards = () => {
     return (
         <Grid>
             <div>
@@ -15,4 +15,4 @@ const Review = () => {
     );
 };
 
-export default Review;
+export default ReviewCards;

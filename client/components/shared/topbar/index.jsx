@@ -2,8 +2,8 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { CgProfile } from 'react-icons/cg';
-import { FlexContentSpace } from '../styles/Flex.styled';
-import CartDrawer from './Drawer';
+import { FlexContentSpace } from '../../styles/Flex.styled';
+import Cart from '../cart';
 
 const Topbar = () => {
     const [open, setOpen] = useState(false);
@@ -17,8 +17,8 @@ const Topbar = () => {
     return (
         <>
             <FlexContentSpace bg='#F0F2F3'>
-                <Link href="/">
-                    <h3 style={{ cursor: 'pointer' }}>Covid 19 Shop</h3>
+                <Link  href="/">
+                    <a style={{ cursor: 'pointer',fontSize:'22px',fontWeight:'500' }}>Covid 19 Shop</a>
                 </Link>
 
                 <div>
@@ -30,7 +30,7 @@ const Topbar = () => {
                     <button><CgProfile size="25"></CgProfile></button>
                 </div>
             </FlexContentSpace>
-            <CartDrawer onClose={onClose} open={open}></CartDrawer>
+            <Cart onClose={onClose} open={open}/>
         </>
     );
 };
