@@ -9,11 +9,15 @@ import TextInput from "../../components/UI/TextInput";
 import { BsArrowRight } from 'react-icons/bs';
 import styled from "styled-components";
 import { Error } from "../../components/UI/Error";
-import { AuthBackEndApi } from "../../api/api";
+import {AuthBackEndApi} from "../../api/api";
+import { useRouter } from 'next/router'
+import {useStoreActions} from "easy-peasy";
 import Link from 'next/link';
 
 
 const Register = () => {
+    const router = useRouter()
+    const {Register} = useStoreActions(actions => actions.Auth);
 
     const {
         register,
@@ -22,28 +26,13 @@ const Register = () => {
         formState: { errors }
     } = useForm();
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         if (data.password !== data.confirmPassword) {
             console.log("Passwords don't match");
         } else {
-            AuthBackEndApi.post('/register', {
-                username: data.name,
-                email: data.email,
-                password: data.password,
-                phone: data.phone
-            }).then(r => {
-                console.log('User profile', r.data.user);
-                console.log('User token', r.data.jwt);
-            }).catch(e => {
-                console.log(e);
-            });
+            await Register(data) && router.push('/');
         }
-
-
     }
-
-
-    console.log(watch("example"));
 
     return (
         <>

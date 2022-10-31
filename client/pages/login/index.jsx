@@ -11,31 +11,24 @@ import styled from "styled-components";
 import { Error } from "../../components/UI/Error";
 import Link from 'next/link';
 
-import { AuthBackEndApi } from "../../api/api";
-import { useStoreActions, useStoreState } from "easy-peasy";
+import {AuthBackEndApi} from "../../api/api";
+import {useStoreActions, useStoreState} from "easy-peasy";
+import {useRouter} from "next/router";
 
 
 const Login = () => {
+    const router = useRouter()
 
     const {
         register,
         handleSubmit,
-        watch,
         formState: { errors }
     } = useForm();
 
-    const { AuthSet } = useStoreActions(actions => actions.Auth);
-    const { AuthToken, AuthUser } = useStoreState(state => state.Auth);
+   const {LogIn} = useStoreActions(actions => actions.Auth);
 
-    const onSubmit = (data) => {
-        AuthBackEndApi.post('/', {
-            identifier: data.email,
-            password: data.password
-        }).then(r => {
-            AuthSet({ token: r.data.jwt, user: r.data.user });
-        }).catch(e => {
-            console.log(e);
-        })
+    const onSubmit = async (data) => {
+        await LogIn(data) && router.push('/');
 
     };
 
@@ -61,7 +54,7 @@ const Login = () => {
                         {errors.password && <Error>Password is required</Error>}
 
                         <ButtonInput type="submit" value={`Sign In`} />
-                        {AuthToken && <h1>{AuthUser.username}</h1>}
+                        {/* {AuthToken && <h1>{AuthUser.username}</h1>} */}
                         <FlexCenter>
                             <p style={{ fontSize: '16px' }}>Don't have an account?</p>
                             <Link href="/register">
