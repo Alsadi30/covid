@@ -1,17 +1,17 @@
-import Head from 'next/head'
-import Brand from '../components/Brand'
-import Product from '../components/Product'
-import Review from '../components/Review'
-import Slide from '../components/slides'
-import Topbar from '../components/shared/Topbar'
-import { Container } from '../components/styles/Container.styled'
-import Navbar from '../components/shared/Navbar'
+import Head from "next/head";
+import BrandCards from "../components/brandCard/brands";
+import ProductCards from "../components/productCard/products";
+import ReviewCards from "../components/reviewCard/reviews";
+import Slide from "../components/slider/slides";
+import Topbar from "../components/shared/topbar";
+import { Container } from "../components/styles/Container.styled";
+import Navbar from "../components/shared/navbar";
 
 export default function Home() {
   return (
     <>
-      <Topbar></Topbar>
-      <Navbar></Navbar>
+      <Topbar />
+      <Navbar />
       <Container>
         <Head>
           <title>Covid Ecommerce Application</title>
@@ -19,13 +19,11 @@ export default function Home() {
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
-
-        <Slide></Slide>
-        <Brand></Brand>
-        <Product></Product>
-        <Review></Review>
-
+        <Slide />
+        <BrandCards />
+        <ProductCards />
+        <ReviewCards />
       </Container>
     </>
-  )
+  );
 }

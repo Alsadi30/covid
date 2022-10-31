@@ -1,16 +1,16 @@
 import React from 'react';
 import { Drawer } from 'antd';
-import { FlexCenter, FlexEnd } from '../styles/Flex.styled';
-import EmptyCard from './EmptyCard';
-import { ProceedButton } from '../UI/Button';
+import { FlexCenter, FlexEnd } from '../../styles/Flex.styled';
+import EmptyCard from '../../UI/EmptyCard';
+import { ProceedButton } from '../../UI/Button';
 
 
-const CartDrawer = ({ onClose, open }) => {
+const Cart = ({ onClose, open }) => {
     return (
         <>
             <Drawer title="Shopping Cart" placement="right" onClose={onClose} open={open}>
                 <FlexCenter style={{ height: '95%' }} direction="column">
-                    <EmptyCard></EmptyCard>
+                    <EmptyCard/>
                     <h3 style={{ marginTop: '10px' }}>Your Card Is Empty</h3>
                 </FlexCenter>
                 <FlexEnd >
@@ -21,4 +21,4 @@ const CartDrawer = ({ onClose, open }) => {
     );
 };
 
-export default CartDrawer;
+export default Cart;

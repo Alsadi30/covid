@@ -1,16 +1,9 @@
-import React from 'react';
-import products from '../staticData/products';
-import { GridLayout } from './styles/Grid.styled';
 import { BsFillCartPlusFill } from 'react-icons/bs';
-import { FlexContentSpace } from './styles/Flex.styled';
+import { FlexContentSpace } from '../styles/Flex.styled';
 
-const Product = () => {
+const Product = ({product}) =>{
     return (
-        <>
-            <h2>On Sale Products</h2>
-            <GridLayout>
-                {
-                    products?.map(product => <div style={{padding: '0 20px'}} key={product?.id}>
+       <>
                         <img src={product?.image} alt={product?.title}></img>
                         <FlexContentSpace>
                             <div>
@@ -21,11 +14,9 @@ const Product = () => {
                                 <button><BsFillCartPlusFill size="35" color="#007580"></BsFillCartPlusFill></button>
                             </div>
                         </FlexContentSpace>
-                    </div>)
-                }
-            </GridLayout>
-        </>
-    );
-};
+                        </>
+                 
+    )
+}
 
-export default Product;
+export default Product

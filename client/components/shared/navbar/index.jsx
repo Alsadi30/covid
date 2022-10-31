@@ -1,14 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Flex, FlexContentAround, Stack } from '../styles/Flex.styled';
+import { Flex, FlexContentAround, Stack } from '../../styles/Flex.styled';
 import { AiOutlineMenu } from 'react-icons/ai';
+import NavItem from './navItem';
+
 
 const items = ['Home', 'Shop', 'Product', 'Pages', 'About'];
 
 const CategoryPara = styled.a`
-    font-size: 22x;
+    font-size: 18x;
     font-weight: 500;
-    padding: 7px 20px;
+    padding: 3px 10px 3px 10px;
     border: 1px solid #E1E3E6;
     border-radius: 6px;
     display: flex;
@@ -27,7 +29,7 @@ const Navbar = () => {
                     {
                         items?.map((item, i) =>
                             <li key={i}>
-                                <a href='#'>{item}</a>
+                                 <NavItem item={item} />
                             </li>
                         )
                     }
@@ -35,7 +37,7 @@ const Navbar = () => {
             </Stack>
 
             <div>
-                <p>Contact: <strong><a href="tel:01771904605">01771904605</a></strong></p>
+                <p style={{ fontSize:'16px',fontWeight:'500' }}>Contact: <strong><a href="tel:01771904605">01771904605</a></strong></p>
             </div>
         </FlexContentAround>
     );
