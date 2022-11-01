@@ -1,14 +1,20 @@
 import GlobalStyles from '../components/styles/Global.styled';
 import '../styles/globals.css';
 import 'antd/dist/antd.css';
-import {StoreProvider} from 'easy-peasy';
+import {StoreProvider, useStoreRehydrated} from 'easy-peasy';
 import store from '../store/store';
 
 function MyApp({ Component, pageProps }) {
+  function WaitForStateRehydration({ children }) {
+    const isRehydrated = useStoreRehydrated();
+    return isRehydrated ? children : null;
+  }
   return (
     <StoreProvider store={store}>
-    <GlobalStyles></GlobalStyles>
-    <Component {...pageProps} />
+        <WaitForStateRehydration>
+            <GlobalStyles />
+            <Component {...pageProps} />
+        </WaitForStateRehydration>
     </StoreProvider>
   )
 }

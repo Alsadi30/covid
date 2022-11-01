@@ -7,4 +7,3 @@ export const backend_base_api = 'http://localhost:1337/api';
 });
 
 
-
