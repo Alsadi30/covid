@@ -7,7 +7,7 @@ export  const LoginApi = (data) => {
         }).then(r => {
             return {token:r.data.jwt,user:r.data.user}
         }).catch(e => {
-            console.log(e)
+            console.warn(e.response.data.error.message)
         })
 
 }
@@ -20,7 +20,7 @@ export  const LoginApi = (data) => {
     }).then(r => {
         return {token:r.data.jwt,user:r.data.user}
     }).catch(e => {
-        console.log(e)
+        console.warn(e.response.data.error.message)
     })
 }
 
