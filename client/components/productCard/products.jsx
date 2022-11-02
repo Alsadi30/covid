@@ -1,9 +1,9 @@
 import React from 'react';
-import products from '../../staticData/products';
 import { GridLayout } from '../styles/Grid.styled';
 import Product from './product';
 
-const ProductCards = () => {
+const ProductCards = ({products}) => {
+   
     return (
         <>
             <h2>On Sale Products</h2>

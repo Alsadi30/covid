@@ -4,7 +4,8 @@
   "info": {
     "singularName": "variant",
     "pluralName": "variants",
-    "displayName": "variant"
+    "displayName": "variant",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -34,6 +35,9 @@
     },
     "stock_quantity": {
       "type": "integer"
+    },
+    "isDefault": {
+      "type": "boolean"
     }
   }
 }

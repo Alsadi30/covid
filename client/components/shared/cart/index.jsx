@@ -3,9 +3,14 @@ import { Drawer } from 'antd';
 import { FlexCenter, FlexEnd } from '../../styles/Flex.styled';
 import EmptyCard from '../../UI/EmptyCard';
 import { ProceedButton } from '../../UI/Button';
+import { useStoreState } from 'easy-peasy';
 
 
 const Cart = ({ onClose, open }) => {
+
+    const {CartProducts} = useStoreState(state => state.Cart)
+    console.log(CartProducts)
+
     return (
         <>
             <Drawer title="Shopping Cart" placement="right" onClose={onClose} open={open}>
