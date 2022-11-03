@@ -9,7 +9,7 @@ import { useStoreState } from 'easy-peasy';
 const Cart = ({ onClose, open }) => {
 
     const {CartProducts} = useStoreState(state => state.Cart)
-    console.log(CartProducts)
+    
 
     return (
         <>

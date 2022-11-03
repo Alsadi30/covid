@@ -15,7 +15,7 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::order.order",
-      "inversedBy": "payment"
+      "mappedBy": "payment"
     },
     "type": {
       "type": "enumeration",

@@ -58,6 +58,10 @@
       "relation": "oneToMany",
       "target": "api::rating.rating",
       "mappedBy": "product"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
     }
   }
 }

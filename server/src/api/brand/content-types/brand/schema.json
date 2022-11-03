@@ -4,7 +4,8 @@
   "info": {
     "singularName": "brand",
     "pluralName": "brands",
-    "displayName": "brand"
+    "displayName": "brand",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -19,6 +20,14 @@
       "relation": "oneToMany",
       "target": "api::product.product",
       "mappedBy": "brand"
+    },
+    "avater": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
     }
   }
 }

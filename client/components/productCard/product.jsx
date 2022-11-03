@@ -10,8 +10,6 @@ const Product = ({product}) =>{
 
     const handleAddToCart = () =>{
            if(AuthToken){
-            console.log(AuthToken)
-            console.log('cale')
             AddProductThunk(product)
            }else{
             // AddProductThunk(product)

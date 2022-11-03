@@ -40,6 +40,8 @@ const CartModel = {
     state.CartProducts = [...payload.attributes.products];
   }),
   AddProductNoAuth: action((state, payload) => {
+   
+    console.log(userId)
     const CartProducts = state.CartProducts;
     let { data, isInCart } = CheckInCart(CartProducts, payload);
     if (isInCart === -1) {
@@ -56,15 +58,16 @@ const CartModel = {
     state.CartProducts = [];
   }),
 
-  AddProductThunk: thunk(async ({ AddProduct }, payload, { getState }) => {
+  AddProductThunk: thunk(async ({ AddProduct }, payload, { getState,getStoreState }) => {
     const cartId = getState().CartId;
     const CartProducts = getState().CartProducts;
-
+    
     let { data, isInCart } = CheckInCart(CartProducts, payload);
 
     if (!cartId) {
       try {
-        const createdCart = await createCartApi(data);
+        let userId = getStoreState().Auth.AuthUser.id
+        const createdCart = await createCartApi(data,userId);
         AddProduct(createdCart.data.data);
       } catch (e) {
         console.log(e);

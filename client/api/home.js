@@ -1,7 +1,7 @@
 import { BackEndApi } from "./api"
 
 
-export const getProducts =async () => {
+export const getProducts = async () => {
   
     try {
         BackEndApi.defaults.headers.common['Authorization'] = `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjY3MjcyMTAwLCJleHAiOjE2Njk4NjQxMDB9.u41PhQRIhKyaCzL68X-RVtEBfjWt2xWZb_A_leoMPhw"}`
@@ -21,8 +21,21 @@ export const getProducts =async () => {
         BackEndApi.defaults.headers.common['Authorization'] = `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjY3MjcyMTAwLCJleHAiOjE2Njk4NjQxMDB9.u41PhQRIhKyaCzL68X-RVtEBfjWt2xWZb_A_leoMPhw"}`
         const res = await BackEndApi.get('/categories')
         const categories = res.data.data  
-        console.log(categories)
         return categories    
+    } catch (e) {
+        console.log(e)
+    }
+  }
+
+
+
+  export const getBrands =async () => {
+  
+    try {
+        BackEndApi.defaults.headers.common['Authorization'] = `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjY3MjcyMTAwLCJleHAiOjE2Njk4NjQxMDB9.u41PhQRIhKyaCzL68X-RVtEBfjWt2xWZb_A_leoMPhw"}`
+        const res = await BackEndApi.get('/brands')
+        const brands = res.data.data  
+        return brands    
     } catch (e) {
         console.log(e)
     }

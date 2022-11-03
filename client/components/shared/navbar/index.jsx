@@ -17,7 +17,7 @@ const CategoryPara = styled.a`
     align-items: center;
 `
 
-const Navbar = () => {
+const Navbar = ({categories}) => {
     return (
         <FlexContentAround>
             <Stack>

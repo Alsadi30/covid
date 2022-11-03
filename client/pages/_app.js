@@ -20,15 +20,18 @@ function MyApp({ Component, pageProps }) {
     return isRehydrated ? children : null;
   }
   return (
-    <QueryClientProvider client={queryClient}>
+    
     <StoreProvider store={store}>
         <WaitForStateRehydration>
+        <QueryClientProvider client={queryClient}>
             <GlobalStyles />
             <Component {...pageProps} />
+            <ReactQueryDevtools initialIsOpen={false} />
+            </QueryClientProvider>
         </WaitForStateRehydration>
     </StoreProvider>
-    <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+    
+   
 
   )
 }

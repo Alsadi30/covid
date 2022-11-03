@@ -74,12 +74,6 @@
       "target": "api::rating.rating",
       "mappedBy": "users_permissions_user"
     },
-    "cart": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::cart.cart",
-      "inversedBy": "users_permissions_user"
-    },
     "addresses": {
       "type": "relation",
       "relation": "oneToMany",
@@ -90,7 +84,13 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::order.order",
-      "mappedBy": "users_permissions_user"
+      "mappedBy": "userId"
+    },
+    "cart": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::cart.cart",
+      "inversedBy": "userId"
     }
   }
 }
