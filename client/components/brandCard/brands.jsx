@@ -1,8 +1,7 @@
-import brands from "../../staticData/brand";
 import { FlexContentSpace } from "../styles/Flex.styled";
 import Brand from "./brand";
 
-const BrandCards = () => {
+const BrandCards = ({brands}) => {
     return (
         <FlexContentSpace>
             {
