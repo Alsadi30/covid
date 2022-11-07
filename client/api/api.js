@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const jwtAuthToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjY3NTg0NTAyLCJleHAiOjE2NzAxNzY1MDJ9.yg618EOUtNuAUsSXE-_HbYTFdIatweaWTPV9-6kcMcw";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjY3NjcxNzEyLCJleHAiOjE2NzAyNjM3MTJ9.a5RVkCNR7odz3SrTNR94dEgNGSnpeNTcqX9ESMbj3cQ";
 
 export const backend_base_api = "http://localhost:1337/api";
 
