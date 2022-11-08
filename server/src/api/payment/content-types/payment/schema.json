@@ -4,7 +4,8 @@
   "info": {
     "singularName": "payment",
     "pluralName": "payments",
-    "displayName": "payment"
+    "displayName": "payment",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -29,7 +30,7 @@
     "status": {
       "type": "boolean"
     },
-    "trastion_id": {
+    "transaction_id": {
       "type": "string"
     }
   }

@@ -68,18 +68,6 @@
       "type": "string",
       "unique": true
     },
-    "ratings": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::rating.rating",
-      "mappedBy": "users_permissions_user"
-    },
-    "addresses": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::address.address",
-      "mappedBy": "users_permissions_user"
-    },
     "orders": {
       "type": "relation",
       "relation": "oneToMany",
@@ -91,6 +79,18 @@
       "relation": "oneToOne",
       "target": "api::cart.cart",
       "inversedBy": "userId"
+    },
+    "addresses": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::address.address",
+      "mappedBy": "userId"
+    },
+    "ratings": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::rating.rating",
+      "mappedBy": "userId"
     }
   }
 }

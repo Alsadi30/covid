@@ -1,28 +1,22 @@
-import { BackEndApi, jwtAuthToken } from "./api";
+import axios from 'axios'
+import { BackEndApi, backend_base_api } from './api'
 
 export const createCartApi = async (data, id) => {
-  let Data = { data: { products: [data], userId: id } };
-
-  BackEndApi.defaults.headers.common[
-    "Authorization"
-  ] = `Bearer ${jwtAuthToken}`;
+  let Data = { data: { products: [data], userId: id } }
   try {
-    const Cart = await BackEndApi.post("/carts", Data);
-    return Cart;
+    const Cart = await axios.post(`${backend_base_api}/carts`, Data)
+    return Cart
   } catch (e) {
-    console.log(e);
+    console.log(e)
   }
-};
+}
 
 export const updateCartApi = async (data, cartId) => {
-  let Data = { data: { products: data } };
-  BackEndApi.defaults.headers.common[
-    "Authorization"
-  ] = `Bearer ${jwtAuthToken}`;
   try {
-    const Cart = await BackEndApi.put(`/carts/${cartId}`, Data);
-    return Cart;
+    let Data = { data: { products: data } }
+    const Cart = await axios.put(`${backend_base_api}/carts/${cartId}`, Data)
+    return Cart
   } catch (e) {
-    console.log(e);
+    console.log(e)
   }
-};
+}

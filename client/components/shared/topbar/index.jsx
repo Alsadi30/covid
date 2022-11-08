@@ -5,8 +5,14 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { FlexContentSpace } from "../../styles/Flex.styled";
 import Cart from "../cart";
+import { useRouter } from 'next/router'
 
 const Topbar = () => {
+ 
+  const router = useRouter()
+
+ const [filterValue, setfilterValue] = useState('')
+ 
   const { AuthToken } = useStoreState((state) => state.Auth);
 
   const [open, setOpen] = useState(false);
@@ -17,6 +23,23 @@ const Topbar = () => {
     setOpen(false);
   };
 
+  const handleChange = (event) => {
+    const { value } = event.target
+    setfilterValue(value)
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    if (filterValue !== '') {
+      const words = filterValue.split(' ');
+      const joined = words.join('-')
+      router.push(`/filter/${joined}`)
+    } else {
+      alert('Set a value to filter')
+    }
+  }
+
+
   return (
     <>
       <FlexContentSpace bg="#F0F2F3">
@@ -26,16 +49,16 @@ const Topbar = () => {
           </a>
         </Link>
 
-        <div>
-          <input type="search" placeholder="Search here.."></input>
-        </div>
+        <form onSubmit = {handleSubmit} >
+          <input onChange={handleChange} type="search" placeholder="Search here.."></input>
+        </form>
 
         <div>
           <button onClick={showDrawer}>
             <AiOutlineShoppingCart size="25"></AiOutlineShoppingCart>
           </button>
           {AuthToken ? (
-            <Link href="/checkout">
+            <Link href="/dashboard">
               <button>
                 <CgProfile size="25"></CgProfile>
               </button>

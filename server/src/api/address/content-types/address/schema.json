@@ -4,14 +4,15 @@
   "info": {
     "singularName": "address",
     "pluralName": "addresses",
-    "displayName": "address"
+    "displayName": "address",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "users_permissions_user": {
+    "userId": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
