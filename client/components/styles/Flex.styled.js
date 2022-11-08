@@ -34,7 +34,8 @@ export const FlexContentSpace = styled.div`
     justify-content: space-between;
     align-items: center;
     background-color: ${(props) => props.bg ? props.bg : ''};
-    padding: 7px 50px;
+    padding: ${(props) => props.padding ? props.padding : ''};
+    margin-top: ${(props) => props.mt ? props.mt : ''};
 
     img {
         max-width: 100%;
