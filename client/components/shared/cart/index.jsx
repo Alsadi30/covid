@@ -4,7 +4,6 @@ import { FlexCenter, FlexEnd } from '../../styles/Flex.styled';
 import EmptyCard from '../../UI/EmptyCard';
 import { ProceedButton } from '../../UI/Button';
 import { useStoreState } from 'easy-peasy';
-import cardProduct from '../../../staticData/cart';
 import CartProduct from './CartProduct';
 import styled from 'styled-components';
 
@@ -17,16 +16,14 @@ const Cart = ({ onClose, open }) => {
 
     const { CartProducts } = useStoreState(state => state.Cart);
 
-    let data = true;
-
 
     return (
         <>
             <Drawer title="Shopping Cart" placement="right" onClose={onClose} open={open}>
                 {
-                    data ?
-                        cardProduct?.map(item => <Box>
-                            <CartProduct item={item}></CartProduct>
+                    CartProducts ?
+                        CartProducts?.map(item => <Box>
+                            <CartProduct item={item}/>
                         </Box>) :
 
                         <FlexCenter style={{ height: '95%' }} direction="column">

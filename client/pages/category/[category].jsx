@@ -9,7 +9,7 @@ const SingleCatProducts = ({ProductsByCategory}) => {
   const categoryName = route.query.category;
 
   // data:Products will be used in the page to render product list
-  const {data: Products} = useQuery ({
+  const {data: Products, isLoading} = useQuery ({
     queryKey: ['ProductByCat', categoryName],
     queryFn: () => getCategoryProducts (categoryName),
     initialData: ProductsByCategory,
@@ -18,6 +18,10 @@ const SingleCatProducts = ({ProductsByCategory}) => {
   // filter products by price and categoryName
   const {data, refetch} = useFilter ('categories', categoryName, 500);
   console.log (data);
+
+  if (isLoading) {
+    return <LoadingSkeleton />;
+  }
 
   return (
     <div>

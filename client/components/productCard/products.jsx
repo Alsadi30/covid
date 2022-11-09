@@ -7,13 +7,13 @@ const Box = styled.div`
     margin-top: 80px;
 `
 
-const ProductCards = ({products}) => {
+const ProductCards = ({products,heading}) => {
 
     console.log(products, 'products');
    
     return (
         <Box>
-            <h2>On Sale Products</h2>
+            <h2>{heading}</h2>
             <GridLayout>
                {
                     products?.map(product =>

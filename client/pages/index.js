@@ -8,11 +8,12 @@ import { Container } from '../components/styles/Container.styled'
 import Navbar from '../components/shared/navbar'
 import { getBrands, getCategories, getProducts } from '../api/home'
 import { useQuery } from '@tanstack/react-query'
+import LoadingSkeleton from '../components/shared/skeleton'
 
 export default function Home ({ saleProducts }) {
   console.log(saleProducts)
 
-  const { data: saleProd } = useQuery({
+  const { data: saleProd, isLoading } = useQuery({
     queryKey: ['saleProducts'],
     queryFn: getProducts,
     initialData: saleProducts
@@ -21,10 +22,14 @@ export default function Home ({ saleProducts }) {
     queryKey: ['categories'],
     queryFn: getCategories
   })
-  const { data: brands } = useQuery({
+  const { data: brands, isLoading: isLoading2 } = useQuery({
     queryKey: ['brands'],
     queryFn: getBrands
   })
+
+  if (isLoading || isLoading2) {
+    return <LoadingSkeleton />
+  }
 
   return (
     <>
@@ -38,7 +43,7 @@ export default function Home ({ saleProducts }) {
       <Container>
         <Slide />
         <BrandCards brands={brands} />
-        <ProductCards products={saleProd} />
+        <ProductCards products={saleProd} heading={'On Sale Products'} />
         <ReviewCards />
       </Container>
     </>

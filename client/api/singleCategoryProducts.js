@@ -1,6 +1,5 @@
 import axios from 'axios'
-import QueryString from 'qs'
-import { BackEndApi, backend_base_api } from './api'
+import { backend_base_api } from './api'
 
 export const getCategoryProducts = async categoryName => {
   try {

@@ -75,6 +75,14 @@ const Checkout = () =>{
 
   
 
+     if (isLoading || isLoading2) {
+      return  <LoadingSkeleton/>
+    }
+      
+  
+  
+  
+
     return (
         <>
           

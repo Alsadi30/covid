@@ -20,6 +20,7 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.38.0",
     "react-icons": "^4.6.0",
+    "react-loading-skeleton": "^3.1.0",
     "styled-components": "^5.3.6",
     "swiper": "^8.4.4"
   },

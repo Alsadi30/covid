@@ -1,13 +1,21 @@
-import { useQuery } from "@tanstack/react-query"
-import { getOrders } from "../../api/order"
+import {useQuery} from '@tanstack/react-query';
+import {getOrders} from '../../api/order';
 
-const Dashboard = () =>{
-    const {data} = useQuery({ queryKey: ['orders'], queryFn: getOrders })
-    return(
-        <div>
-            Dashboard
-        </div>
-    )
-}
+const Dashboard = () => {
+  const {data, isLoading} = useQuery ({
+    queryKey: ['orders'],
+    queryFn: getOrders,
+  });
 
-export default Dashboard
+  if (isLoading) {
+    return <LoadingSkeleton />;
+  }
+
+  return (
+    <div>
+      Dashboard
+    </div>
+  );
+};
+
+export default Dashboard;

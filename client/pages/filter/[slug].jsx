@@ -1,12 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import Head from 'next/head';
-import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { getFilterdProducts } from '../../api/home';
 import ProductCards from '../../components/productCard/products';
 import Navbar from '../../components/shared/navbar';
+import LoadingSkeleton from '../../components/shared/skeleton';
 import Topbar from '../../components/shared/topbar';
 import { Container } from '../../components/styles/Container.styled';
+
 
 function Filter () {
   const router = useRouter ();
@@ -19,11 +21,15 @@ function Filter () {
   });
   url = url.slice (0 , -1);
 
-  const {data: filteredProducts} = useQuery ({
+  const {data: filteredProducts,isLoading} = useQuery ({
     queryKey: ['filteredProducts', url],
     queryFn: () => getFilterdProducts (url),
   });
+  
 
+  if (isLoading) {
+    return  <LoadingSkeleton/>
+  }
     
     return (
         <>
@@ -35,8 +41,9 @@ function Filter () {
         </Head>
         <Topbar/>
         <Container>
-        <Navbar />
-        <ProductCards products={filteredProducts}/>
+          <Navbar />
+          {filteredProducts.length>0?<ProductCards products={filteredProducts} heading={"Filtered Products"} />:<h1 style={{textAlign:'center',margin:"30px"}} >No Products Found</h1>}
+                
       </Container>
 
     </>

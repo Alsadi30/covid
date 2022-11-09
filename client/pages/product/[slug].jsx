@@ -1,36 +1,39 @@
-import { useQuery } from "@tanstack/react-query";
-import { useRouter } from "next/router";
-import { getAllProducts, getSingleProduct } from "../../api/singleProduct";
+import {useQuery} from '@tanstack/react-query';
+import {useRouter} from 'next/router';
+import {getAllProducts, getSingleProduct} from '../../api/singleProduct';
 
-
-const SingleProduct = ({ product }) => {
-  const route = useRouter();
+const SingleProduct = ({product}) => {
+  const route = useRouter ();
   const slug = route.query.slug;
   // data:Products will be used in the page to render product list
-  const { data: Product } = useQuery({
-    queryKey: ["singleProduct",slug],
-    queryFn:() => getSingleProduct(slug),
+  const {data: Product, isLoading} = useQuery ({
+    queryKey: ['singleProduct', slug],
+    queryFn: () => getSingleProduct (slug),
     initialData: product,
   });
-  return <div>Page of a Single Product  </div>;
+
+  if (isLoading) {
+    return <LoadingSkeleton />;
+  }
+
+  return <div>Page of a Single Product </div>;
 };
 
 export default SingleProduct;
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps = async ({params}) => {
   const slug = params.slug;
-  const product = await getSingleProduct(slug);
+  const product = await getSingleProduct (slug);
   return {
-    props: { product }, // will be passed to the page component as props
+    props: {product}, // will be passed to the page component as props
   };
 };
 
 export const getStaticPaths = async ({}) => {
-  const Products = await getAllProducts();
-  console.log(Products)
-  const paths = Products.map((product) => ({
-   
-    params: { slug: product.attributes.slug },
+  const Products = await getAllProducts ();
+  console.log (Products);
+  const paths = Products.map (product => ({
+    params: {slug: product.attributes.slug},
   }));
   return {
     paths,
