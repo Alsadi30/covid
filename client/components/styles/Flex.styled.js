@@ -21,6 +21,7 @@ export const FlexEnd = styled.div`
     align-items: center;
     justify-content: flex-end;
     flex-direction: ${(props) => props.direction ? props.direction : ''};
+    flex-grow: 1;
 `
 
 export const FlexCenterD = styled.div`

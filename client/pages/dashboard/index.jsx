@@ -1,5 +1,6 @@
 import {useQuery} from '@tanstack/react-query';
 import {getOrders} from '../../api/order';
+import LoadingSkeleton from '../../components/shared/skeleton';
 
 const Dashboard = () => {
   const {data, isLoading} = useQuery ({
