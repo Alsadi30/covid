@@ -14,6 +14,8 @@ export const FlexCenter = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: ${(props) => props.direction ? props.direction : ''};
+    gap: ${(props) => props.gap ? props.gap : ''};
+    margin-top: ${(props) => props.mt ? props.mt : ''};
 `
 
 export const FlexEnd = styled.div`

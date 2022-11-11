@@ -38,3 +38,20 @@ export const Grid = styled.div`
         object-fit: cover;
     }
 `
+
+export const GridFraction = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    place-items: center;
+
+    li {
+        list-style: none;
+        font-size: 16px;
+        padding: 4px 0;
+        cursor: pointer;
+
+        &:hover {
+            color: #029FAE;
+        }
+    }
+`

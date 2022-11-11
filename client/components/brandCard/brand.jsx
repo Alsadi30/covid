@@ -10,7 +10,6 @@ const Box = styled.div`
 `
 
 const Brand = ({ brand }) => {
-    console.log(brand, 'brand')
     return (
         <Box>
             <img src={brand.attributes.avater.data.attributes.url} alt={brand?.attributes.name}></img>
