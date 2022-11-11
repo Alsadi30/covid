@@ -18,15 +18,20 @@ const Product = ({ product }) => {
   );
 
   const handleAddToCart = () => {
+    let cartItem = {
+      productId: product.id,
+      name: product.attributes.name,
+      thumbnail: product.attributes.thumbnails.data[0].attributes.url,
+      price: product.attributes.variants.data[0].attributes.sale_price,
+    }
     if (AuthToken) {
-      AddProductThunk(product);
+      console.log(AuthToken)
+      AddProductThunk(cartItem);
     } else {
-      // AddProductThunk(product)
-      AddProductNoAuth(product);
+      AddProductNoAuth(cartItem);
     }
   };
 
-  console.log(product, 'product')
 
   return (
     <Box>

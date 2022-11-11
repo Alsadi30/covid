@@ -2,12 +2,7 @@ import {action, useStoreActions, useStoreState} from 'easy-peasy';
 import React from 'react';
 import {AiFillDelete} from 'react-icons/ai';
 import styled from 'styled-components';
-import {
-  Flex,
-  FlexCenter,
-  FlexContentSpace,
-  Stack,
-} from '../../styles/Flex.styled';
+import {Flex, FlexContentSpace} from '../../styles/Flex.styled';
 
 const Box = styled.div`
     display: flex;
@@ -21,14 +16,39 @@ const Box = styled.div`
 `;
 
 const CartProduct = ({item}) => {
-  console.log (item);
+  const {AuthToken} = useStoreState (state => state.Auth);
+  const {
+    AddProductNoAuth,
+    AddProductThunk,
+    RemoveProduct,
+    RemoveProductThunk,
+    DecreaseProductQuantityNoAuth,
+    DecreaseProductQuantityThunk,
+  } = useStoreActions (actions => actions.Cart);
 
-  const cart = useStoreActions (action => action.Cart);
-
-  const handleDecrease = () => {};
-  const handleRemove = () => {
-    cart.RemoveProduct (item);
+  const handleAddToCart = () => {
+    if (AuthToken) {
+      AddProductThunk (item);
+    } else {
+      AddProductNoAuth (item);
+    }
   };
+
+  const handleRemoveFromCart = () => {
+    if (AuthToken) {
+      RemoveProductThunk (item);
+    } else {
+      RemoveProduct (item);
+    }
+  };
+  const handleDecrease = () => {
+    if (AuthToken) {
+      DecreaseProductQuantityThunk (item);
+    } else {
+      DecreaseProductQuantityNoAuth (item);
+    }
+  };
+
   return (
     <Box>
       <div>
@@ -43,11 +63,11 @@ const CartProduct = ({item}) => {
         <FlexContentSpace mt="10px">
           <p>${item.quentity * item.price}</p>
           <Flex>
-            <button>-</button>
+            <button onClick={handleDecrease}>-</button>
             <p>{item.quentity}</p>
-            <button>+</button>
+            <button onClick={handleAddToCart}>+</button>
           </Flex>
-          <span onClick={handleRemove}><AiFillDelete /></span>
+          <span onClick={handleRemoveFromCart}> <AiFillDelete /></span>
         </FlexContentSpace>
       </div>
     </Box>

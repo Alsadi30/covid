@@ -16,14 +16,18 @@ const AuthModel = {
   LogIn: thunk(async ({ AuthSet }, payload) => {
     const data = await LoginApi(payload)
     AuthSet({ ...data })
-    setAuthToken(data.token)
+    if (data) {
+      setAuthToken(data.token)
+    }
     return !!data
   }),
 
   Register: thunk(async ({ AuthSet }, payload) => {
     const data = await RegisterApi(payload)
     AuthSet({ ...data })
-    setAuthToken(data.token)
+    if (data.token) {
+      setAuthToken(data.token)
+    }
     return !!data
   })
 }

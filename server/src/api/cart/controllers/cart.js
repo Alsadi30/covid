@@ -19,5 +19,20 @@ module.exports = createCoreController('api::cart.cart', ({ Strapi }) => ({
     // some more logic
 
     return response
+  },
+  async getCart (ctx) {
+    const id = ctx.state.user.id
+    console.log(id)
+    const entries = await strapi.entityService.findMany('api::cart.cart', {
+      populate: '*',
+      filters: {
+        userId: {
+          id: {
+            $eq: id
+          }
+        }
+      }
+    })
+    return entries
   }
 }))

@@ -2,6 +2,7 @@ import {useQuery} from '@tanstack/react-query';
 import {useRouter} from 'next/router';
 import {getBrands} from '../../api/home';
 import {getBrandProducts} from '../../api/singleBrandProducts';
+import LoadingSkeleton from '../../components/shared/skeleton';
 
 const SingleBrandProducts = ({ProductsByBrand}) => {
   const route = useRouter ();

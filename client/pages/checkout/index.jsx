@@ -6,6 +6,7 @@ import { createAddress, createOrder } from "../../api/checkout";
 
 import AddressForm from "../../components/addressForm";
 import Navbar from "../../components/shared/navbar";
+import LoadingSkeleton from "../../components/shared/skeleton";
 import Topbar from "../../components/shared/topbar";
 import { CheckoutFrame } from "../../components/styles/checkout.styled";
 import { Container } from "../../components/styles/Container.styled";

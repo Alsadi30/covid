@@ -1,6 +1,7 @@
 import {useQuery} from '@tanstack/react-query';
 import {useRouter} from 'next/router';
 import {getAllProducts, getSingleProduct} from '../../api/singleProduct';
+import LoadingSkeleton from '../../components/shared/skeleton';
 
 const SingleProduct = ({product}) => {
   const route = useRouter ();

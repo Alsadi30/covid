@@ -3,6 +3,7 @@ import {getCategoryProducts} from '../../api/singleCategoryProducts';
 import {useRouter} from 'next/router';
 import {getCategories} from '../../api/home';
 import useFilter from '../../hooks/useFilter';
+import LoadingSkeleton from '../../components/shared/skeleton';
 
 const SingleCatProducts = ({ProductsByCategory}) => {
   const route = useRouter ();

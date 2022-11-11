@@ -39,7 +39,6 @@ const useTotal = (cart, vouchar) => {
   })
 
   const makeTotal = () => {
-    console.log(subTotal)
     if (discount == 0) {
       setTotal(subTotal)
     } else {

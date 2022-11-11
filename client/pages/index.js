@@ -9,9 +9,20 @@ import Navbar from '../components/shared/navbar'
 import { getBrands, getCategories, getProducts } from '../api/home'
 import { useQuery } from '@tanstack/react-query'
 import LoadingSkeleton from '../components/shared/skeleton'
+import { useEffect } from 'react'
+import { getCartofUser } from '../api/cart'
+import { useStoreActions } from 'easy-peasy'
 
 export default function Home ({ saleProducts }) {
-  console.log(saleProducts)
+  const { SetDatabaseCart } = useStoreActions(action => action.Cart)
+  useEffect(() => {
+    ;(async () => {
+      const cart = await getCartofUser()
+      if (cart) {
+        SetDatabaseCart(cart)
+      }
+    })()
+  }, [])
 
   const { data: saleProd, isLoading } = useQuery({
     queryKey: ['saleProducts'],
@@ -59,6 +70,4 @@ export const getStaticProps = async () => {
   } catch (error) {
     console.log(error)
   }
-
-  // console.log(posts)
 }
