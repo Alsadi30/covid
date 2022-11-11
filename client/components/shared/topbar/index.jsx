@@ -5,15 +5,28 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { FlexContentSpace } from "../../styles/Flex.styled";
 import Cart from "../cart";
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
+import styled from "styled-components";
+import { Badge } from "antd";
+
+const Form = styled.form`
+    input {
+      padding: 10px;
+
+      &:focus {
+        border: 1px solid #029FAE;
+      }
+    }
+`
 
 const Topbar = () => {
- 
+
   const router = useRouter()
 
- const [filterValue, setfilterValue] = useState('')
- 
+  const [filterValue, setfilterValue] = useState('')
+
   const { AuthToken } = useStoreState((state) => state.Auth);
+  const { CartProducts } = useStoreState(state => state.Cart);
 
   const [open, setOpen] = useState(false);
   const showDrawer = () => {
@@ -49,14 +62,16 @@ const Topbar = () => {
           </a>
         </Link>
 
-        <form onSubmit = {handleSubmit} >
+        <Form onSubmit={handleSubmit} >
           <input onChange={handleChange} type="search" placeholder="Search here.."></input>
-        </form>
+        </Form>
 
         <div>
-          <button onClick={showDrawer}>
-            <AiOutlineShoppingCart size="25"></AiOutlineShoppingCart>
-          </button>
+          <Badge count={CartProducts.length} style={{marginRight: '7px'}}>
+            <button onClick={showDrawer}>
+              <AiOutlineShoppingCart size="25"></AiOutlineShoppingCart>
+            </button>
+          </Badge>
           {AuthToken ? (
             <Link href="/dashboard">
               <button>

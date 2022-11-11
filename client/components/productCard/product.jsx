@@ -1,12 +1,18 @@
 import { useStoreActions, useStoreState } from "easy-peasy";
 import { BsFillCartPlusFill } from "react-icons/bs";
 import styled from "styled-components";
-import { FlexContentSpace } from "../styles/Flex.styled";
+import { FlexCenter, FlexContentSpace } from "../styles/Flex.styled";
 
 const Box = styled.div`
+    // border: 1px solid #f4f4f4;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 7px;
+    padding: 15px;
+
     img {
       max-width: 100%;
-      height: 350px;
+      margin-top: 15px;
+      height: 250px;
       object-fit: cover;
     }
 `
@@ -35,7 +41,9 @@ const Product = ({ product }) => {
 
   return (
     <Box>
-      <img src={product?.attributes.thumbnails.data[0].attributes.url} alt={product?.attributes.name}></img>
+      <FlexCenter>
+        <img src={product?.attributes.thumbnails.data[0].attributes.url} alt={product?.attributes.name}></img>
+      </FlexCenter>
       <FlexContentSpace>
         <div>
           <h4>{product?.attributes.name}</h4>

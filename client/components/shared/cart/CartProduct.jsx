@@ -13,6 +13,12 @@ const Box = styled.div`
     p {
         font-size: 16px;
     }
+
+    img {
+      max-width: 100%;
+      height: 50px;
+      object-fit: cover;
+    }
 `;
 
 const CartProduct = ({item}) => {
@@ -56,18 +62,18 @@ const CartProduct = ({item}) => {
       </div>
       <div>
         <div>
-          <h3>{item.name}</h3>
-          <small>Price ${item.price}</small>
+          <h3>{item?.name}</h3>
+          <small>Price ${item?.price}</small>
         </div>
 
         <FlexContentSpace mt="10px">
-          <p>${item.quentity * item.price}</p>
+          <p>${item?.quentity * item?.price}</p>
           <Flex>
             <button onClick={handleDecrease}>-</button>
-            <p>{item.quentity}</p>
+            <p>{item?.quentity}</p>
             <button onClick={handleAddToCart}>+</button>
           </Flex>
-          <span onClick={handleRemoveFromCart}> <AiFillDelete /></span>
+          <span onClick={handleRemove}><AiFillDelete /></span>
         </FlexContentSpace>
       </div>
     </Box>
