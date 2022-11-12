@@ -9,7 +9,8 @@ const Box = styled.div`
     position: fixed;
     top: 45%;
     right: 0;
-    cursor: pointer;  
+    cursor: pointer;
+    z-index: 1000;  
     // left: 50%; 
     // transform: translate(-50%, -50%);
 `
@@ -54,6 +55,12 @@ const GlobalCart = () => {
         setOpen(false);
     };
 
+    useEffect(() => {
+        makeTotal();
+    }, [subTotal])
+
+    console.log(total, subTotal, makeTotal, 'from global');
+
 
     return (
         <>
@@ -63,7 +70,7 @@ const GlobalCart = () => {
                     <p>{CartProducts?.length} items</p>
                 </CartIcon>
                 <PriceBox>
-                    <p>$ { subTotal }</p>
+                    <p>$ {subTotal}</p>
                 </PriceBox>
             </Box>
             <Cart onClose={onClose} open={open} />

@@ -19,6 +19,7 @@ import { getCartofUser } from '../api/cart'
 import { useStoreActions } from 'easy-peasy'
 import GlobalCart from '../components/shared/globalCart/GlobalCart'
 import styled from 'styled-components'
+import Footer from '../components/shared/footer/footer'
 
 const Box = styled.div`
   position: relative;
@@ -76,6 +77,7 @@ export default function Home ({ saleProducts, latestProducts }) {
         <ReviewCards />
       </Container>
       <GlobalCart></GlobalCart>
+      <Footer></Footer>
     </Box>
   )
 }

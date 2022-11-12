@@ -19,6 +19,11 @@ const GlobalStyles = createGlobalStyle`
     margin: 0 !important;
   }
 
+  ul {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
   img {
     max-width: 100%;
 }
