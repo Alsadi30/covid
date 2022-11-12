@@ -57,7 +57,7 @@ const Topbar = () => {
     <>
       <FlexContentSpace bg="#F0F2F3" padding="15px 50px">
         <Link href="/">
-          <a style={{ cursor: "pointer", fontSize: "22px", fontWeight: "500" }}>
+          <a style={{ cursor: "pointer", fontSize: "22px", fontWeight: "500", color: '#029FAE' }}>
             Covid 19 Shop
           </a>
         </Link>

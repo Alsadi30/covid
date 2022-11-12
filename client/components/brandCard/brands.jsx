@@ -1,14 +1,14 @@
-import { FlexContentSpace } from "../styles/Flex.styled";
+import { FlexCenter, FlexContentSpace } from "../styles/Flex.styled";
 import Brand from "./brand";
 
 const BrandCards = ({brands}) => {
     return (
-        <FlexContentSpace mt="35px">
+        <FlexCenter mt="35px" gap="6rem">
             {
                 brands?.map(brand => <Brand key={brand?.id} brand={brand}>
                 </Brand>)
             }
-        </FlexContentSpace>
+        </FlexCenter>
     );
 };
 

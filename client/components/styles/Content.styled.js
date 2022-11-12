@@ -16,6 +16,7 @@ export const Content = styled.div`
 
   h1 {
     font-size: 3rem;
-    max-width: 50%
+    max-width: 50%;
+    line-height: 1.1;
   }
 `;
