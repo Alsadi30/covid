@@ -1,8 +1,8 @@
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import { getCoupon } from '../api/checkout'
 
-const useTotal = (cart, vouchar) => {
+const useTotal = cart => {
   const [subTotal, setSubTotal] = useState(0)
   const [discount, setDiscount] = useState(0)
   const [total, setTotal] = useState(0)
@@ -17,10 +17,7 @@ const useTotal = (cart, vouchar) => {
     setSubTotal(subtotal)
   }
 
-  const { isInitialLoading, isError, data, refetch, isFetching } = useQuery({
-    queryKey: ['checkDiscount', vouchar],
-    queryFn: () => getCoupon(vouchar),
-    enabled: false,
+  const { isError, data, mutate } = useMutation(getCoupon, {
     onSuccess: data => {
       let date1 = new Date()
 
@@ -47,7 +44,7 @@ const useTotal = (cart, vouchar) => {
   }
 
   return {
-    refetch,
+    checkCoupon: mutate,
     discount,
     subTotal,
     total,

@@ -11,7 +11,7 @@ const Box = styled.div`
     margin: 10px 0;
 
     p {
-        font-size: 16px;
+        font-size: 14px;
     }
 
     img {

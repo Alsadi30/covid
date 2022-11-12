@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const CheckoutFrame = styled.div`
+  display: flex;
   padding: 40px 40px;
   // border: 1px solid gray;
   background: #ffffff;
@@ -9,6 +10,6 @@ export const CheckoutFrame = styled.div`
   margin-top: 10px;
 
   input {
-    font-size: 16px;
+    font-size: 14px;
   }
 `

@@ -24,6 +24,7 @@ export const createOrder = async (data, userId) => {
 }
 
 export const getCoupon = async data => {
+  console.log(data)
   try {
     const res = await axios.get(
       `${backend_base_api}/cupons?filters[name][$eq]=${data}`
