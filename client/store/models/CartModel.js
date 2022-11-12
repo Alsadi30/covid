@@ -141,7 +141,7 @@ const CartModel = {
 
   DecreaseProductQuantityThunk: thunk(
     async (
-      { AddProduct, RemoveProduct },
+      { AddProduct, RemoveProduct, RemoveProductThunk },
       payload,
       { getState, getStoreState }
     ) => {
@@ -154,7 +154,11 @@ const CartModel = {
         item => item.productId === payload.productId
       )
       if (product.quentity < 1) {
-        RemoveProduct(payload)
+        if (!cartId) {
+          RemoveProduct(payload)
+        } else {
+          RemoveProductThunk(payload)
+        }
       } else {
         if (!cartId) {
           try {

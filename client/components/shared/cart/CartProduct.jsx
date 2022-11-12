@@ -73,7 +73,7 @@ const CartProduct = ({item}) => {
             <p>{item?.quentity}</p>
             <button onClick={handleAddToCart}>+</button>
           </Flex>
-          <span onClick={handleRemove}><AiFillDelete /></span>
+          <span onClick={handleRemoveFromCart}><AiFillDelete /></span>
         </FlexContentSpace>
       </div>
     </Box>

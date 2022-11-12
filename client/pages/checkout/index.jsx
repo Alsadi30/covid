@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { createAddress, createOrder } from "../../api/checkout";
 
 import AddressForm from "../../components/addressForm";
+import OrderItems from "../../components/orderItems/items";
 import Navbar from "../../components/shared/navbar";
 import LoadingSkeleton from "../../components/shared/skeleton";
 import Topbar from "../../components/shared/topbar";
@@ -18,8 +19,9 @@ const Checkout = () =>{
 
     const queryClient =  new QueryClient();
     const {Auth,Cart} = useStoreState(state => state)
-
-   const {refetch,discount,subTotal,total,makesubTotal,makeTotal} = useTotal(Cart.CartProducts, 'covid19')
+   const CartProducts = Cart.CartProducts
+  
+   const {refetch,discount,subTotal,total,makesubTotal,makeTotal} = useTotal(CartProducts, 'covid19')
   
   console.log(discount,subTotal,total)
   
@@ -98,6 +100,7 @@ const Checkout = () =>{
           <CheckoutFrame>
           <AddressForm  onSubmit ={onSubmit}/>
           </CheckoutFrame>
+          <OrderItems items={CartProducts} />
           <button onClick={refetch}> refetch</button>
          </Container>
 

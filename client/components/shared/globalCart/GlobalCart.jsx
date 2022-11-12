@@ -1,5 +1,5 @@
 import { useStoreState } from 'easy-peasy';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import styled from 'styled-components';
 import useTotal from '../../../hooks/useTotal';
@@ -23,7 +23,7 @@ const CartIcon = styled.div`
     flex-direction: column;
     border-top-left-radius: 10px;
 `
-
+ 
 const PriceBox = styled.div`
     text-align: center;
     padding: 8px 0;
@@ -39,7 +39,13 @@ const PriceBox = styled.div`
 const GlobalCart = () => {
     const [open, setOpen] = useState(false);
     const { CartProducts } = useStoreState(state => state.Cart);
-    const { total, subTotal, makeTotal, makesubTotal } = useTotal();
+    const { total, subTotal, makeTotal, makesubTotal } = useTotal(CartProducts);
+
+   useEffect(() => {
+     makesubTotal()
+   }, [subTotal,CartProducts])
+   
+
 
     const showDrawer = () => {
         setOpen(true);
@@ -57,8 +63,7 @@ const GlobalCart = () => {
                     <p>{CartProducts?.length} items</p>
                 </CartIcon>
                 <PriceBox>
-                    {/* <p>${cart.reduce((acc, cur) => acc + cur.price * cur.counts, 0).toFixed(2)}</p> */}
-                    <p>$ 0:00</p>
+                    <p>$ { subTotal }</p>
                 </PriceBox>
             </Box>
             <Cart onClose={onClose} open={open} />

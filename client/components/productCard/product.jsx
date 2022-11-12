@@ -31,7 +31,6 @@ const Product = ({ product }) => {
       price: product.attributes.variants.data[0].attributes.sale_price,
     }
     if (AuthToken) {
-      console.log(AuthToken)
       AddProductThunk(cartItem);
     } else {
       AddProductNoAuth(cartItem);

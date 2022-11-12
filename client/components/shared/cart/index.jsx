@@ -1,11 +1,13 @@
-import React from 'react';
 import { Drawer } from 'antd';
-import { FlexCenter, FlexEnd } from '../../styles/Flex.styled';
-import EmptyCard from '../../UI/EmptyCard';
-import { ProceedButton } from '../../UI/Button';
 import { useStoreState } from 'easy-peasy';
-import CartProduct from './CartProduct';
+import Link from 'next/link';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import useTotal from '../../../hooks/useTotal';
+import { FlexCenter, FlexEnd } from '../../styles/Flex.styled';
+import { ProceedButton } from '../../UI/Button';
+import EmptyCard from '../../UI/EmptyCard';
+import CartProduct from './CartProduct';
 
 const Box = styled.div`
         display: flex;
@@ -16,9 +18,14 @@ const Box = styled.div`
 
 const Cart = ({ onClose, open }) => {
 
-    const { CartProducts } = useStoreState(state => state.Cart);
+    const { Cart, Auth } = useStoreState(state => state);
+    let CartProducts = Cart.CartProducts
+    const { total, subTotal, makeTotal, makesubTotal } = useTotal(CartProducts);
 
-    console.log(CartProducts, 'cardPRodc')
+    useEffect(() => {
+     makesubTotal()
+   }, [subTotal,CartProducts])
+   
 
 
     return (
@@ -37,9 +44,20 @@ const Cart = ({ onClose, open }) => {
                             </FlexCenter>
                     }
 
-                    <FlexEnd>
+                    
+                    {Auth.AuthToken ? (
+            <Link href="/checkout">
+             <FlexEnd>
                         <ProceedButton>Proceed To Checkout</ProceedButton>
                     </FlexEnd>
+            </Link>
+          ) : (
+            <Link href="/login">
+            <FlexEnd>
+                        <ProceedButton>Proceed To Checkout</ProceedButton>
+                    </FlexEnd>
+            </Link>
+          )}
                 </Box>
             </Drawer>
         </>
