@@ -60,9 +60,9 @@ export default function Home ({ saleProducts }) {
       <Navbar categories={categories} />
       <Container>
         <Slide />
-        <BrandCards brands={brands} />
-        <ProductCards products={saleProd} heading={'On Sale Products'} />
-        <ReviewCards />
+        <BrandCards brands={brands} id="Brand"/>
+        <ProductCards products={saleProd} heading={'On Sale Products'} id="Products"/>
+        <ReviewCards id="Review"/>
       </Container>
       <GlobalCart></GlobalCart>
       <Footer></Footer>

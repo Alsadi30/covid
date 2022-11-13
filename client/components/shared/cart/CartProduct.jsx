@@ -73,7 +73,7 @@ const CartProduct = ({item}) => {
             <p>{item?.quentity}</p>
             <button onClick={handleAddToCart}>+</button>
           </Flex>
-          <span onClick={handleRemove}><AiFillDelete /></span>
+          <span style={{ cursor: 'pointer' }} onClick={handleRemoveFromCart}><AiFillDelete color="red"/></span>
         </FlexContentSpace>
       </div>
     </Box>

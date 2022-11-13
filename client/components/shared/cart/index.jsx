@@ -1,6 +1,6 @@
 import React from 'react';
 import { Drawer } from 'antd';
-import { FlexCenter, FlexEnd } from '../../styles/Flex.styled';
+import { FlexCenter, FlexEnd, FlexStart } from '../../styles/Flex.styled';
 import EmptyCard from '../../UI/EmptyCard';
 import { ProceedButton } from '../../UI/Button';
 import { useStoreState } from 'easy-peasy';
@@ -9,7 +9,7 @@ import styled from 'styled-components';
 
 const Box = styled.div`
         display: flex;
-        // justify-content: space-between;
+        justify-content: space-between;
         flex-direction: column;
 `
 
@@ -24,12 +24,12 @@ const Cart = ({ onClose, open }) => {
     return (
         <>
             <Drawer title="Shopping Cart" placement="right" onClose={onClose} open={open}>
-                <Box>
+                {/* <Box> */}
                     {
-                        CartProducts ?
-                            CartProducts?.map(item => <Box>
+                        CartProducts.length > 0 ?
+                            CartProducts?.map(item => <FlexStart style={{ height: '95%' }} direction="column">
                                 <CartProduct item={item} />
-                            </Box>) :
+                            </FlexStart>) :
 
                             <FlexCenter style={{ height: '95%' }} direction="column">
                                 <EmptyCard />
@@ -40,7 +40,7 @@ const Cart = ({ onClose, open }) => {
                     <FlexEnd>
                         <ProceedButton>Proceed To Checkout</ProceedButton>
                     </FlexEnd>
-                </Box>
+                {/* </Box> */}
             </Drawer>
         </>
     );
