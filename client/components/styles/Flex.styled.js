@@ -18,6 +18,13 @@ export const FlexCenter = styled.div`
     margin-top: ${(props) => props.mt ? props.mt : ''};
 `
 
+export const FlexStart = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: ${(props) => props.direction ? props.direction : ''};
+
+`
+
 export const FlexEnd = styled.div`
     display: flex;
     align-items: center;
