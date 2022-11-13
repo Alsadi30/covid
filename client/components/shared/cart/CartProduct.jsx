@@ -11,7 +11,7 @@ const Box = styled.div`
     margin: 10px 0;
 
     p {
-        font-size: 16px;
+        font-size: 14px;
     }
 
     img {
@@ -73,7 +73,11 @@ const CartProduct = ({item}) => {
             <p>{item?.quentity}</p>
             <button onClick={handleAddToCart}>+</button>
           </Flex>
+<<<<<<< HEAD
           <span style={{ cursor: 'pointer' }} onClick={handleRemoveFromCart}><AiFillDelete color="red"/></span>
+=======
+          <span onClick={handleRemoveFromCart}><AiFillDelete /></span>
+>>>>>>> 27d194fbe233ae68d96d2e6109555cb55dc34be1
         </FlexContentSpace>
       </div>
     </Box>

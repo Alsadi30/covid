@@ -28,10 +28,9 @@ const Product = ({ product }) => {
       productId: product.id,
       name: product.attributes.name,
       thumbnail: product.attributes.thumbnails.data[0].attributes.url,
-      price: product.attributes.variants.data[0].attributes.sale_price,
+      price: product.attributes.variants.data[0].attributes.sale_price?product.attributes.variants.data[0].attributes.sale_price:product.attributes.variants.data[0].attributes.regular_price,
     }
     if (AuthToken) {
-      console.log(AuthToken)
       AddProductThunk(cartItem);
     } else {
       AddProductNoAuth(cartItem);
@@ -42,12 +41,12 @@ const Product = ({ product }) => {
   return (
     <Box>
       <FlexCenter>
-        <img src={product?.attributes.thumbnails.data[0].attributes.url} alt={product?.attributes.name}></img>
+        <img src={product.attributes.thumbnails.data[0].attributes.url} alt={product?.attributes.name}></img>
       </FlexCenter>
       <FlexContentSpace>
         <div>
-          <h4>{product?.attributes.name}</h4>
-          <p>${product?.attributes.variants.data[0].attributes.sale_price}</p>
+          <h4>{product.attributes.name}</h4>
+          <p>${product.attributes.variants.data[0].attributes.sale_price?product.attributes.variants.data[0].attributes.sale_price:product.attributes.variants.data[0].attributes.regular_price}</p>
         </div>
         <div>
           <button onClick={handleAddToCart}>

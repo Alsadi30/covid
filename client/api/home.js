@@ -45,3 +45,16 @@ export const getFilterdProducts = async url => {
     console.log(e)
   }
 }
+
+export const getLatestProducts = async () => {
+  try {
+    const res = await axios.get(
+      `${backend_base_api}/products?populate[0]=thumbnails&populate[1]=variants&sort[0]=createdAt%3Adesc&pagination[page]=1&pagination[pageSize]=10`
+    )
+    const products = res.data.data
+    return products
+  } catch (e) {
+    console.log(e)
+    return e
+  }
+}

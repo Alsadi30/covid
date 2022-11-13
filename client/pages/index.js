@@ -6,7 +6,12 @@ import Slide from '../components/slider/slides'
 import Topbar from '../components/shared/topbar'
 import { Container } from '../components/styles/Container.styled'
 import Navbar from '../components/shared/navbar'
-import { getBrands, getCategories, getProducts } from '../api/home'
+import {
+  getBrands,
+  getCategories,
+  getLatestProducts,
+  getProducts
+} from '../api/home'
 import { useQuery } from '@tanstack/react-query'
 import LoadingSkeleton from '../components/shared/skeleton'
 import { useEffect } from 'react'
@@ -20,7 +25,7 @@ const Box = styled.div`
   position: relative;
 `
 
-export default function Home ({ saleProducts }) {
+export default function Home ({ saleProducts, latestProducts }) {
   const { SetDatabaseCart } = useStoreActions(action => action.Cart)
   useEffect(() => {
     ;(async () => {
@@ -36,6 +41,12 @@ export default function Home ({ saleProducts }) {
     queryFn: getProducts,
     initialData: saleProducts
   })
+  const { data: latestProd, isLoading: isLoading3 } = useQuery({
+    queryKey: ['latestProducts'],
+    queryFn: getLatestProducts,
+    initialData: latestProducts
+  })
+
   const { data: categories } = useQuery({
     queryKey: ['categories'],
     queryFn: getCategories
@@ -60,9 +71,10 @@ export default function Home ({ saleProducts }) {
       <Navbar categories={categories} />
       <Container>
         <Slide />
-        <BrandCards brands={brands} id="Brand"/>
-        <ProductCards products={saleProd} heading={'On Sale Products'} id="Products"/>
-        <ReviewCards id="Review"/>
+        <BrandCards brands={brands} />
+        <ProductCards products={saleProd} heading={'On Sale Products'} />
+        <ProductCards products={latestProd} heading={'Latest Products'} />
+        <ReviewCards />
       </Container>
       <GlobalCart></GlobalCart>
       <Footer></Footer>
@@ -73,8 +85,9 @@ export default function Home ({ saleProducts }) {
 export const getStaticProps = async () => {
   try {
     const saleProducts = await getProducts()
+    const latestProducts = await getLatestProducts()
     return {
-      props: { saleProducts } // will be passed to the page component as props
+      props: { saleProducts, latestProducts } // will be passed to the page component as props
     }
   } catch (error) {
     console.log(error)

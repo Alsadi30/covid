@@ -5,6 +5,8 @@ import { useEffect } from "react";
 import { createAddress, createOrder } from "../../api/checkout";
 
 import AddressForm from "../../components/addressForm";
+import OrderItems from "../../components/orderItems/items";
+import Footer from "../../components/shared/footer/footer";
 import Navbar from "../../components/shared/navbar";
 import LoadingSkeleton from "../../components/shared/skeleton";
 import Topbar from "../../components/shared/topbar";
@@ -14,14 +16,13 @@ import useTotal from "../../hooks/useTotal";
 
 const Checkout = () =>{
 
- 
-
     const queryClient =  new QueryClient();
     const {Auth,Cart} = useStoreState(state => state)
-
-   const {refetch,discount,subTotal,total,makesubTotal,makeTotal} = useTotal(Cart.CartProducts, 'covid19')
+   const CartProducts = Cart.CartProducts
   
-  console.log(discount,subTotal,total)
+   const {checkCoupon,discount,subTotal,total,makesubTotal,makeTotal} = useTotal(CartProducts)
+  
+  
   
    useEffect(() => {
      makesubTotal()
@@ -35,7 +36,7 @@ const Checkout = () =>{
         mutateOrder({
           data:{
             address: data.data?.data.id,
-            sub_total: 400
+            sub_total: subTotal,
           },
           userId: Auth?.AuthUser?.id
         })
@@ -96,11 +97,12 @@ const Checkout = () =>{
         <Container>
           <Navbar />
           <CheckoutFrame>
-          <AddressForm  onSubmit ={onSubmit}/>
+            <AddressForm onSubmit={onSubmit} />
+            <OrderItems items={CartProducts} discount={discount} subTotal={subTotal} total = {total} checkCoupon={checkCoupon} />
           </CheckoutFrame>
-          <button onClick={refetch}> refetch</button>
-         </Container>
 
+         </Container>
+<Footer/>
     </>
     )
 }

@@ -12,21 +12,24 @@ module.exports = createCoreController(
     async custom (ctx) {
       // some custom logic here
 
-      console.table(ctx.query.populate)
-      console.table(ctx.query.filters)
+      // console.table(ctx.query.populate)
+      // console.table(ctx.query.filters)
 
       const entries = await strapi.entityService.findMany(
         'api::category.category',
         {
           populate: {
             products: {
-              // sort: 'name:asc',
               populate: {
-                variants: true,
-                filters: {
-                  id: {
-                    $eq: 100
-                  }
+                variants: true
+              }
+            }
+          },
+          filters: {
+            products: {
+              variants: {
+                regular_price: {
+                  $eq: 500
                 }
               }
             }
@@ -34,7 +37,6 @@ module.exports = createCoreController(
         }
       )
 
-      console.log(entries)
       return entries
     }
   })
