@@ -42,7 +42,7 @@ const items2 = [
 ];
 
 
-const items = ['Home', 'Shop', 'Product', 'Pages', 'About'];
+const items = ['Home', 'Products', 'Review', 'About'];
 
 const CategoryPara = styled.a`
     font-size: 18x;
