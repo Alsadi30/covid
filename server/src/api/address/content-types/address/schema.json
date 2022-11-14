@@ -12,17 +12,11 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "userId": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "addresses"
-    },
     "street_address": {
       "type": "text"
     },
     "area": {
-      "type": "string"
+      "type": "text"
     },
     "city": {
       "type": "string"
@@ -32,6 +26,12 @@
     },
     "zip": {
       "type": "biginteger"
+    },
+    "user_id": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "addresses"
     },
     "orders": {
       "type": "relation",
