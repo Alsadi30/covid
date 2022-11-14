@@ -11,7 +11,7 @@ import CartProduct from './CartProduct';
 
 const Box = styled.div`
         display: flex;
-        justify-content: space-between;
+        // justify-content: space-between;
         flex-direction: column;
 `
 
@@ -20,24 +20,25 @@ const Cart = ({ onClose, open }) => {
 
     const { Cart, Auth } = useStoreState(state => state);
     let CartProducts = Cart.CartProducts
-    const {subTotal,  makesubTotal } = useTotal(CartProducts);
+    const { subTotal, makesubTotal } = useTotal(CartProducts);
 
     useEffect(() => {
-     makesubTotal()
-   }, [subTotal,CartProducts])
-   
+        makesubTotal()
+    }, [subTotal, CartProducts])
+
 
 
     return (
         <>
             <Drawer title="Shopping Cart" placement="right" onClose={onClose} open={open}>
-                <Box>
+                <Box style={{ height: '100%' }}>
+
                     {
                         CartProducts.length > 0 ?
                             CartProducts?.map((item, i) =>
-                                <FlexStart key={i * Math.random(100)} style={{ height: '95%' }} direction="column">
-                                <CartProduct key={i*Math.random(100)} item={item} />
-                            </FlexStart>) :
+                                <FlexStart key={i * Math.random(100)} direction="column">
+                                    <CartProduct key={i * Math.random(100)} item={item} />
+                                </FlexStart>) :
 
                             <FlexCenter style={{ height: '95%' }} direction="column">
                                 <EmptyCard />
@@ -45,21 +46,22 @@ const Cart = ({ onClose, open }) => {
                             </FlexCenter>
                     }
 
-                    
+
                     {Auth.AuthToken ? (
-            <Link href="/checkout">
-             <FlexEnd>
-                        <ProceedButton>Proceed To Checkout</ProceedButton>
-                    </FlexEnd>
-            </Link>
-          ) : (
-            <Link href="/login">
-            <FlexEnd>
-                        <ProceedButton>Proceed To Checkout</ProceedButton>
-                    </FlexEnd>
-            </Link>
-          )}
+                        <Link href="/checkout">
+                            {/* <FlexEnd> */}
+                                <ProceedButton>Proceed To Checkout</ProceedButton>
+                            {/* </FlexEnd> */}
+                        </Link>
+                    ) : (
+                        <Link href="/login">
+                            {/* <FlexEnd> */}
+                                <ProceedButton>Proceed To Checkout</ProceedButton>
+                            {/* </FlexEnd> */}
+                        </Link>
+                    )}
                 </Box>
+                {/* </Box> */}
             </Drawer>
         </>
     );

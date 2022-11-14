@@ -9,8 +9,6 @@ const Box = styled.div`
 
 const ProductCards = ({products,heading}) => {
 
-    console.log(products, 'products');
-   
     return (
         <Box>
             <h2>{heading}</h2>

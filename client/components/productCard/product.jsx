@@ -15,6 +15,14 @@ const Box = styled.div`
       height: 250px;
       object-fit: cover;
     }
+
+    button {
+      transition: all 0.3s ease;
+    }
+
+    button:active {
+      scale: 1.2;
+    }
 `
 
 const Product = ({ product }) => {
