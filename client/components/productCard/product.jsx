@@ -19,7 +19,10 @@ const Product = ({ product }) => {
 
   return (
     <>
-      {/* <img src={product?.attributes.thumbnails.data[0].attributes.url} alt={product?.attributes.name}></img> */}
+      <img
+        src={product?.attributes.thumbnails.data[0].attributes.url}
+        alt={product?.attributes.name}
+      ></img>
       <FlexContentSpace>
         <div>
           <h4>{product?.attributes.name}</h4>
