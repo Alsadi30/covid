@@ -4,7 +4,7 @@ import { backend_base_api } from './api'
 export const getSingleProduct = async slug => {
   try {
     const res = await axios.get(
-      `${backend_base_api}/products?filters[name][$eq]=${slug}&populate[0]=variants`
+      `${backend_base_api}/products?filters[slug][$eq]=${slug}&populate[0]=variants&populate[1]=thumbnails`
     )
     const product = res.data.data
     return product

@@ -18,8 +18,9 @@ function LoadingSkeleton () {
             margin: '15px',
           }}
         >
-          {times.map (i => (
+          {times.map ((u, i) => (
             <Skeleton
+              key={i * Math.random (10)}
               count={1}
               height={210}
               width={210}

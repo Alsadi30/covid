@@ -47,11 +47,23 @@ export const handleBuy = async data => {
 }
 
 export const createOrderItem = async data => {
-  console.log('called')
   try {
     const res = await axios.post(`${backend_base_api}/order-items`, data)
     return res.data
   } catch (e) {
     console.log(e)
+  }
+}
+
+export const ConfirmOrderPayment = async session_id => {
+  try {
+    const res = await axios.put(`${backend_base_api}/confirm`, {
+      data: { transaction_id: session_id }
+    })
+    const data = await res.data
+    console.log(data)
+    return data
+  } catch (err) {
+    console.log(err)
   }
 }

@@ -1,23 +1,19 @@
-import {QueryClient, useMutation, useQueries} from '@tanstack/react-query';
-import {useStoreActions, useStoreState} from 'easy-peasy';
+import { QueryClient, useMutation } from '@tanstack/react-query';
+import { useStoreActions, useStoreState } from 'easy-peasy';
 import Head from 'next/head';
-import {useEffect, useState} from 'react';
-import {createAddress, createOrder, createOrderItem, handleBuy} from '../../api/checkout';
-
+import { useEffect, useState } from 'react';
+import { createAddress, createOrderItem, handleBuy } from '../../api/checkout';
 import AddressForm from '../../components/addressForm';
 import OrderItems from '../../components/orderItems/items';
 import Footer from '../../components/shared/footer/footer';
 import Navbar from '../../components/shared/navbar';
 import LoadingSkeleton from '../../components/shared/skeleton';
 import Topbar from '../../components/shared/topbar';
-import {CheckoutFrame} from '../../components/styles/checkout.styled';
-import {Container} from '../../components/styles/Container.styled';
+import { CheckoutFrame } from '../../components/styles/checkout.styled';
+import { Container } from '../../components/styles/Container.styled';
 import useTotal from '../../hooks/useTotal';
-
-import {loadStripe} from '@stripe/stripe-js';
-import axios from 'axios';
-import {backend_base_api} from '../../api/api';
-import {getCartofUser} from '../../api/cart';
+import { loadStripe } from '@stripe/stripe-js';
+import { getCartofUser } from '../../api/cart';
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
@@ -31,6 +27,7 @@ const Checkout = () => {
   const {SetDatabaseCart, DeleteCartThunk} = useStoreActions (
     action => action.Cart
   );
+  const [orderdata,setorderData] = useState({})
   const CartProducts = Cart.CartProducts;
 
   const {
@@ -79,31 +76,30 @@ const Checkout = () => {
       queryClient.invalidateQueries ('create');
     },
   });
-
+ 
   const {mutate: mutateOrder, isLoading: isLoading2} = useMutation (handleBuy, {
-    onSuccess:async data => {
-     console.log('on success')
-      // let length = CartProducts.length-1
-      // console.log(length)
-  
-      // let orderItem = CartProducts.map(async(item) => {
-      //   mutateOrderItem ({
-      //     data: {
-      //       orderId: data.newOrder.id,
-      //       userId: Auth.AuthUser.id,
-      //       productId: item.productId,
-      //       quantity: item.quentity
-      //   }})
-      // })
-
-      // console.log(orderItem)
+    onSuccess: async (data) => {
+      console.log('on success')
+      setorderData({...orderdata,data})
+      console.log(orderdata)
+      console.log(data)
+    
+      let orderItem = CartProducts.map(async(item) => {
+        mutateOrderItem ({
+          data: {
+            orderId: data.newOrder.id,
+            userId: Auth.AuthUser.id,
+            productId: item.productId,
+            quantity: item.quentity
+        }})
+      })
       const stripe = await stripePromise;
-      // orderItem[length].then(() => {
+      const isresolved = Promise.all(orderItem).then((res) => {  
         DeleteCartThunk(Cart.CartId);
         const result = stripe.redirectToCheckout ({
           sessionId: `${data.id}`,
-        });
-      // }).catch((e)=> console.log(e)) 
+        }); 
+       })    
     },
     onError: () => {
       alert ('there was an error');
@@ -114,23 +110,17 @@ const Checkout = () => {
   });
 
 
-
-  // const { mutate:mutateOrderItem, isLoading:isLoading4} = useMutation(createOrderItem, {
-  //   onSuccess: async (Data) => {
-  //     console.log (Data);
-  //       const stripe = await stripePromise;
-  //       DeleteCartThunk(Cart.CartId);
-  //       const result = stripe.redirectToCheckout ({
-  //         sessionId: `${data.id}`,
-  //       });
-  //   },
-  //   onError: () => {
-  //     alert ('there was an error');
-  //   },
-  //   onSettled: () => {
-  //     queryClient.invalidateQueries ('create');
-  //   },
-  // });
+  const { mutate:mutateOrderItem, isLoading:isLoading4} = useMutation(createOrderItem, {
+    onSuccess: async (data) => {
+      console.log(data);
+    },
+    onError: () => {
+      alert ('there was an error');
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries ('create');
+    },
+  });
 
 
 

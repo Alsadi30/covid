@@ -13,6 +13,8 @@ const SingleProduct = ({product}) => {
     initialData: product,
   });
 
+  console.log (product);
+
   if (isLoading) {
     return <LoadingSkeleton />;
   }
@@ -32,7 +34,6 @@ export const getStaticProps = async ({params}) => {
 
 export const getStaticPaths = async ({}) => {
   const Products = await getAllProducts ();
-  console.log (Products);
   const paths = Products.map (product => ({
     params: {slug: product.attributes.slug},
   }));

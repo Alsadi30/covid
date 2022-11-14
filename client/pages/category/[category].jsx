@@ -17,7 +17,7 @@ const SingleCatProducts = ({ProductsByCategory}) => {
   });
 
   // filter products by price and categoryName
-  const {data, refetch} = useFilter ('categories', categoryName, 500);
+  const {data, refetch} = useFilter ('category', categoryName, 500, 'asc');
   console.log (data);
 
   if (isLoading) {

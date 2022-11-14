@@ -1,17 +1,12 @@
 import { Drawer } from 'antd';
-<<<<<<< HEAD
 import { FlexCenter, FlexEnd, FlexStart } from '../../styles/Flex.styled';
 import EmptyCard from '../../UI/EmptyCard';
-=======
 import { useStoreState } from 'easy-peasy';
 import Link from 'next/link';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import useTotal from '../../../hooks/useTotal';
-import { FlexCenter, FlexEnd } from '../../styles/Flex.styled';
->>>>>>> 27d194fbe233ae68d96d2e6109555cb55dc34be1
 import { ProceedButton } from '../../UI/Button';
-import EmptyCard from '../../UI/EmptyCard';
 import CartProduct from './CartProduct';
 
 const Box = styled.div`
@@ -25,7 +20,7 @@ const Cart = ({ onClose, open }) => {
 
     const { Cart, Auth } = useStoreState(state => state);
     let CartProducts = Cart.CartProducts
-    const { total, subTotal, makeTotal, makesubTotal } = useTotal(CartProducts);
+    const {subTotal,  makesubTotal } = useTotal(CartProducts);
 
     useEffect(() => {
      makesubTotal()
@@ -36,11 +31,12 @@ const Cart = ({ onClose, open }) => {
     return (
         <>
             <Drawer title="Shopping Cart" placement="right" onClose={onClose} open={open}>
-                {/* <Box> */}
+                <Box>
                     {
                         CartProducts.length > 0 ?
-                            CartProducts?.map(item => <FlexStart style={{ height: '95%' }} direction="column">
-                                <CartProduct item={item} />
+                            CartProducts?.map((item, i) =>
+                                <FlexStart key={i * Math.random(100)} style={{ height: '95%' }} direction="column">
+                                <CartProduct key={i*Math.random(100)} item={item} />
                             </FlexStart>) :
 
                             <FlexCenter style={{ height: '95%' }} direction="column">
@@ -61,13 +57,9 @@ const Cart = ({ onClose, open }) => {
             <FlexEnd>
                         <ProceedButton>Proceed To Checkout</ProceedButton>
                     </FlexEnd>
-<<<<<<< HEAD
-                {/* </Box> */}
-=======
             </Link>
           )}
                 </Box>
->>>>>>> 27d194fbe233ae68d96d2e6109555cb55dc34be1
             </Drawer>
         </>
     );

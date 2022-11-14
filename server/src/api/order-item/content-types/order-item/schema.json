@@ -4,7 +4,8 @@
   "info": {
     "singularName": "order-item",
     "pluralName": "order-items",
-    "displayName": "OrderItem"
+    "displayName": "OrderItem",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -23,7 +24,7 @@
       "target": "plugin::users-permissions.user",
       "inversedBy": "order_items"
     },
-    "productId": {
+    "product_id": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::product.product",

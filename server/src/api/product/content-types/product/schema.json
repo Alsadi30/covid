@@ -67,7 +67,7 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::order-item.order-item",
-      "inversedBy": "productId"
+      "inversedBy": "product_id"
     }
   }
 }

@@ -1,8 +1,8 @@
-import {action, useStoreActions, useStoreState} from 'easy-peasy';
+import { useStoreActions, useStoreState } from 'easy-peasy';
 import React from 'react';
-import {AiFillDelete} from 'react-icons/ai';
+import { AiFillDelete } from 'react-icons/ai';
 import styled from 'styled-components';
-import {Flex, FlexContentSpace} from '../../styles/Flex.styled';
+import { Flex, FlexContentSpace } from '../../styles/Flex.styled';
 
 const Box = styled.div`
     display: flex;
@@ -73,11 +73,7 @@ const CartProduct = ({item}) => {
             <p>{item?.quentity}</p>
             <button onClick={handleAddToCart}>+</button>
           </Flex>
-<<<<<<< HEAD
           <span style={{ cursor: 'pointer' }} onClick={handleRemoveFromCart}><AiFillDelete color="red"/></span>
-=======
-          <span onClick={handleRemoveFromCart}><AiFillDelete /></span>
->>>>>>> 27d194fbe233ae68d96d2e6109555cb55dc34be1
         </FlexContentSpace>
       </div>
     </Box>
