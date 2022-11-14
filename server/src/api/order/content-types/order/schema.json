@@ -46,6 +46,17 @@
       "relation": "oneToOne",
       "target": "api::payment.payment",
       "inversedBy": "order"
+    },
+    "transaction_id": {
+      "type": "text",
+      "unique": false,
+      "required": true
+    },
+    "order_items": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::order-item.order-item",
+      "mappedBy": "orderId"
     }
   }
 }

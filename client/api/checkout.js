@@ -36,3 +36,22 @@ export const getCoupon = async data => {
     return error
   }
 }
+
+export const handleBuy = async data => {
+  try {
+    const res = await axios.post(`${backend_base_api}/orders`, data)
+    return res.data
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+export const createOrderItem = async data => {
+  console.log('called')
+  try {
+    const res = await axios.post(`${backend_base_api}/order-items`, data)
+    return res.data
+  } catch (e) {
+    console.log(e)
+  }
+}

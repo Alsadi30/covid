@@ -1,9 +1,9 @@
 module.exports = {
   routes: [
     {
-      method: 'GET',
-      path: '/custom',
-      handler: 'order.exampleAction',
+      method: 'PUT',
+      path: '/confirm',
+      handler: 'order.confirm',
       config: {
         // auth: false
       }

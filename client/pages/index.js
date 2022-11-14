@@ -26,12 +26,15 @@ const Box = styled.div`
 `
 
 export default function Home ({ saleProducts, latestProducts }) {
-  const { SetDatabaseCart } = useStoreActions(action => action.Cart)
+  const { SetDatabaseCart, ClearCart } = useStoreActions(action => action.Cart)
   useEffect(() => {
     ;(async () => {
       const cart = await getCartofUser()
       if (cart) {
+        console.log(cart)
         SetDatabaseCart(cart)
+      } else {
+        ClearCart()
       }
     })()
   }, [])

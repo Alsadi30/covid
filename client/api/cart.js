@@ -30,3 +30,14 @@ export const getCartofUser = async () => {
     console.log(e)
   }
 }
+
+export const deleteCart = async cartId => {
+  try {
+    let res = await axios.delete(`${backend_base_api}/carts/${cartId}`)
+    let cart = res.data
+    console.log(cart)
+    return cart
+  } catch (e) {
+    console.log(e)
+  }
+}

@@ -18,9 +18,6 @@
       "target": "plugin::users-permissions.user",
       "inversedBy": "addresses"
     },
-    "type": {
-      "type": "string"
-    },
     "street_address": {
       "type": "text"
     },

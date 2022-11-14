@@ -62,6 +62,12 @@
     "slug": {
       "type": "uid",
       "targetField": "name"
+    },
+    "order_item": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::order-item.order-item",
+      "inversedBy": "productId"
     }
   }
 }

@@ -1,5 +1,5 @@
 import { action, thunk } from 'easy-peasy'
-import { createCartApi, updateCartApi } from '../../api/cart'
+import { createCartApi, deleteCart, updateCartApi } from '../../api/cart'
 
 const CheckInCartInc = (CartProducts, payload) => {
   const isInCart = CartProducts.findIndex(product => {
@@ -42,10 +42,6 @@ const ProductInCartDec = (CartProducts, payload) => {
     return product.productId === payload.productId
   })
   const data = CartProducts?.map((product, i) => {
-    console.log(product)
-    console.log(product.name)
-    console.log(product.productId)
-    console.log(payload.productId)
     if (product.productId === payload.productId) {
       return (CartProducts[i] = {
         productId: payload.productId,
@@ -58,7 +54,6 @@ const ProductInCartDec = (CartProducts, payload) => {
       return product
     }
   })
-  console.log(data)
   return { data, isInCart }
 }
 
@@ -66,6 +61,7 @@ const CartModel = {
   CartId: '',
   CartProducts: [],
   AddProduct: action((state, payload) => {
+    console.log(payload.attributes.products)
     payload.id ? (state.CartId = payload.id) : (state.CartId = '')
     state.CartProducts = [...payload.attributes.products]
   }),
@@ -149,7 +145,7 @@ const CartModel = {
       const CartProducts = getState().CartProducts
 
       let { data, isInCart } = ProductInCartDec(CartProducts, payload)
-
+      console.log(data)
       let product = CartProducts.find(
         item => item.productId === payload.productId
       )
@@ -162,6 +158,7 @@ const CartModel = {
       } else {
         if (!cartId) {
           try {
+            console.log('call from no cart id')
             let userId = getStoreState().Auth.AuthUser.id
             const createdCart = await createCartApi(data, userId)
             AddProduct(createdCart.data.data)
@@ -170,14 +167,19 @@ const CartModel = {
           }
         } else {
           try {
-            if (isInCart !== -1) {
-              const updatedCart = await updateCartApi(data, cartId)
-              AddProduct(updatedCart.data.data)
-            } else {
-              const Data = [...CartProducts, data]
-              const updatedCart = await updateCartApi(Data, cartId)
-              AddProduct(updatedCart.data.data)
-            }
+            // if (isInCart !== -1) {
+            console.log('call from has cart id and has in cart')
+            const updatedCart = await updateCartApi(data, cartId)
+            AddProduct(updatedCart.data.data)
+            console.log(updatedCart.data.data)
+            // } else {
+            // console.log('call from has cart id but not in cart')
+            // const Data = [...CartProducts, data]
+            // console.log(Data)
+            // const updatedCart = await updateCartApi(Data, cartId)
+
+            // AddProduct(updatedCart.data.data)
+            // }
           } catch (e) {
             console.log(e)
           }
@@ -186,13 +188,20 @@ const CartModel = {
     }
   ),
 
-  ClearCart: action(state => {
-    state.CartProducts = []
-  }),
   SetDatabaseCart: action((state, payload) => {
     state.CartId = payload.id
     state.CartProducts = payload.products
     console.log(payload)
+  }),
+
+  ClearCart: action(state => {
+    state.CartId = ''
+    state.CartProducts = []
+  }),
+
+  DeleteCartThunk: thunk(async ({ ClearCart }, payload) => {
+    let cart = deleteCart(payload)
+    ClearCart()
   })
 }
 

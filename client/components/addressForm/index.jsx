@@ -35,10 +35,7 @@ const AddressForm = ({onSubmit}) => {
                     <TextInput short {...register("zip", { required: "Zip is Required." })} placeholder="Zip" type="number" />
                 {errors.zip && <Error>Zip is required</Error>}
                 
-                <SelectInput {...register("type",{required:true})} placeholder='Address Type' >
-        <option value="shipping">Shipping Address</option>
-        <option value="billing">Billing Address</option>
-      </SelectInput>
+               
 
                 <ButtonInput type="submit" value={`Confirm`} />
     </form>

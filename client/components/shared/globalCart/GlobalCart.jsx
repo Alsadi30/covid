@@ -59,7 +59,7 @@ const GlobalCart = () => {
         makeTotal();
     }, [subTotal])
 
-    console.log(total, subTotal, makeTotal, 'from global');
+   
 
 
     return (

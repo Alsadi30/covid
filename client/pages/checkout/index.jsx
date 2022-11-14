@@ -1,110 +1,173 @@
-import { QueryClient, useMutation } from "@tanstack/react-query";
-import { useStoreState } from "easy-peasy";
-import Head from "next/head";
-import { useEffect } from "react";
-import { createAddress, createOrder } from "../../api/checkout";
+import {QueryClient, useMutation, useQueries} from '@tanstack/react-query';
+import {useStoreActions, useStoreState} from 'easy-peasy';
+import Head from 'next/head';
+import {useEffect, useState} from 'react';
+import {createAddress, createOrder, createOrderItem, handleBuy} from '../../api/checkout';
 
-import AddressForm from "../../components/addressForm";
-import OrderItems from "../../components/orderItems/items";
-import Footer from "../../components/shared/footer/footer";
-import Navbar from "../../components/shared/navbar";
-import LoadingSkeleton from "../../components/shared/skeleton";
-import Topbar from "../../components/shared/topbar";
-import { CheckoutFrame } from "../../components/styles/checkout.styled";
-import { Container } from "../../components/styles/Container.styled";
-import useTotal from "../../hooks/useTotal";
+import AddressForm from '../../components/addressForm';
+import OrderItems from '../../components/orderItems/items';
+import Footer from '../../components/shared/footer/footer';
+import Navbar from '../../components/shared/navbar';
+import LoadingSkeleton from '../../components/shared/skeleton';
+import Topbar from '../../components/shared/topbar';
+import {CheckoutFrame} from '../../components/styles/checkout.styled';
+import {Container} from '../../components/styles/Container.styled';
+import useTotal from '../../hooks/useTotal';
 
-const Checkout = () =>{
+import {loadStripe} from '@stripe/stripe-js';
+import axios from 'axios';
+import {backend_base_api} from '../../api/api';
+import {getCartofUser} from '../../api/cart';
 
-    const queryClient =  new QueryClient();
-    const {Auth,Cart} = useStoreState(state => state)
-   const CartProducts = Cart.CartProducts
-  
-   const {checkCoupon,discount,subTotal,total,makesubTotal,makeTotal} = useTotal(CartProducts)
-  
-  
-  
-   useEffect(() => {
-     makesubTotal()
-     makeTotal()
-  }, [subTotal,discount])
- 
-  
-    const { mutate, isLoading } = useMutation(createAddress, {
-        onSuccess: data => {
-          console.log(data)
-        mutateOrder({
-          data:{
-            address: data.data?.data.id,
-            sub_total: subTotal,
-          },
-          userId: Auth?.AuthUser?.id
-        })
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+const stripePromise = loadStripe (
+  'pk_test_51JIc4ILGcSzbpHaWTaH3MizuhcquTe1VxzsbVYpVujw7j7CV3XqBle3SpErIyvWnMqz2EhnuJ0lp2MORC0Xtczpw00RFByRCEK'
+);
+
+const Checkout = () => {
+  const queryClient = new QueryClient ();
+  const {Auth, Cart} = useStoreState (state => state);
+  const {SetDatabaseCart, DeleteCartThunk} = useStoreActions (
+    action => action.Cart
+  );
+  const CartProducts = Cart.CartProducts;
+
+  const {
+    checkCoupon,
+    discount,
+    subTotal,
+    total,
+    makesubTotal,
+    makeTotal,
+  } = useTotal (CartProducts);
+
+  useEffect (
+    () => {
+      makesubTotal ();
+      makeTotal ();
+    },
+    [subTotal, discount, CartProducts]
+  );
+
+  useEffect (() => {
+    (async () => {
+      const cart = await getCartofUser ();
+      if (cart) {
+        SetDatabaseCart (cart);
+      }
+    }) ();
+  }, []);
+
+  const {mutate, isLoading} = useMutation (createAddress, {
+    onSuccess: data => {
+      console.log (data);
+      mutateOrder ({
+        data: {
+          address: data?.data.data.id,
+          sub_total: subTotal,
+          discount: discount,
+          total_price: total,
         },
-        onError: () => {
-          alert("there was an error")
-        },
-        onSettled: () => {
-          queryClient.invalidateQueries('create');
-        }
+        userId: Auth.AuthUser.id,
       });
+    },
+    onError: () => {
+      alert ('there was an error');
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries ('create');
+    },
+  });
 
+  const {mutate: mutateOrder, isLoading: isLoading2} = useMutation (handleBuy, {
+    onSuccess:async data => {
+     console.log('on success')
+      // let length = CartProducts.length-1
+      // console.log(length)
   
-  
-      const { mutate:mutateOrder , isLoading:isLoading2 } = useMutation(createOrder, {
-        onSuccess: data => {
-          console.log(data);
-              const message = "success"
-          alert(message)
-        },
-        onError: () => {
-          alert("there was an error")
-        },
-        onSettled: () => {
-          queryClient.invalidateQueries('create');
-        }
-      });
+      // let orderItem = CartProducts.map(async(item) => {
+      //   mutateOrderItem ({
+      //     data: {
+      //       orderId: data.newOrder.id,
+      //       userId: Auth.AuthUser.id,
+      //       productId: item.productId,
+      //       quantity: item.quentity
+      //   }})
+      // })
 
-    
-    
+      // console.log(orderItem)
+      const stripe = await stripePromise;
+      // orderItem[length].then(() => {
+        DeleteCartThunk(Cart.CartId);
+        const result = stripe.redirectToCheckout ({
+          sessionId: `${data.id}`,
+        });
+      // }).catch((e)=> console.log(e)) 
+    },
+    onError: () => {
+      alert ('there was an error');
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries ('create');
+    },
+  });
 
 
-   
-    const onSubmit = async (data) => {
-        console.log(data)
-        mutate(data,Auth?.AuthUser?.id);
-     };
 
-  
+  // const { mutate:mutateOrderItem, isLoading:isLoading4} = useMutation(createOrderItem, {
+  //   onSuccess: async (Data) => {
+  //     console.log (Data);
+  //       const stripe = await stripePromise;
+  //       DeleteCartThunk(Cart.CartId);
+  //       const result = stripe.redirectToCheckout ({
+  //         sessionId: `${data.id}`,
+  //       });
+  //   },
+  //   onError: () => {
+  //     alert ('there was an error');
+  //   },
+  //   onSettled: () => {
+  //     queryClient.invalidateQueries ('create');
+  //   },
+  // });
 
-     if (isLoading || isLoading2) {
-      return  <LoadingSkeleton/>
-    }
-      
-  
-  
-  
 
-    return (
-        <>
-          
-        <Head>
-            <title>CheckOut</title>
-            <meta name="description" content="Generated by create next app" />
-            <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <Topbar/>
-        <Container>
-          <Navbar />
-          <CheckoutFrame>
-            <AddressForm onSubmit={onSubmit} />
-            <OrderItems items={CartProducts} discount={discount} subTotal={subTotal} total = {total} checkCoupon={checkCoupon} />
-          </CheckoutFrame>
 
-         </Container>
-<Footer/>
+  const onSubmit = async data => {
+    mutate (data, Auth.AuthUser.id);
+  };
+
+  if (isLoading || isLoading2) {
+    return <LoadingSkeleton />;
+  }
+
+  return (
+    <>
+
+      <Head>
+        <title>CheckOut</title>
+        <meta name="description" content="Generated by create next app" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Topbar />
+      <Container>
+        <Navbar />
+        <CheckoutFrame>
+          <AddressForm onSubmit={onSubmit} />
+          <OrderItems
+            items={CartProducts}
+            discount={discount}
+            subTotal={subTotal}
+            total={total}
+            checkCoupon={checkCoupon}
+          />
+        </CheckoutFrame>
+
+      </Container>
+      <Footer />
     </>
-    )
-}
+  );
+};
 
-export default Checkout
+export default Checkout;

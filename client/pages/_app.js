@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import 'antd/dist/antd.css'
-import { StoreProvider, useStoreRehydrated } from 'easy-peasy'
+import { StoreProvider, useStoreActions, useStoreRehydrated } from 'easy-peasy'
 import { useEffect } from 'react'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { setAuthToken } from '../api/api'
