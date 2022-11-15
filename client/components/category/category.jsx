@@ -9,7 +9,6 @@ import {
   DropDownListContainer,
   Input,
   ListItem,
-  MainWrapper,
   SideBar,
   SidebarTitle,
   Wrapper,
@@ -42,9 +41,9 @@ function SingleCategory({ products }) {
             <Button bg="#029FAE">Filter</Button>
           </pricerWrapper>
         </SideBar>
-        <MainWrapper>
-          <ProductCards products={products} />
-        </MainWrapper>
+        <div>
+          <ProductCards products={products} heading={"Category Products"} />
+        </div>
       </Wrapper>
     </Container>
   );

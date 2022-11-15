@@ -71,5 +71,4 @@ export const Input = styled.input`
 export const MainWrapper = styled.div`
   display: grid | inline-grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 16px;
 `;
