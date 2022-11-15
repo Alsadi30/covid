@@ -23,6 +23,8 @@ const Product = ({ product }) => {
     (actions) => actions.Cart
   );
 
+  console.log(product, 'products');
+
   const handleAddToCart = () => {
     let cartItem = {
       productId: product.id,

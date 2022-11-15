@@ -9,14 +9,14 @@ const Box = styled.div`
 
 const ProductCards = ({products,heading}) => {
 
-    console.log(products, 'products');
+   
    
     return (
         <Box>
             <h2>{heading}</h2>
             <GridLayout>
                {
-                    products?.map(product =>
+                products?.map(product =>
                         {
                             return(
                                 <div style={{padding: '0 20px'}} key={product?.id}>
