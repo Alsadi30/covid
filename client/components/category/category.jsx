@@ -1,7 +1,7 @@
 import { useState } from "react";
+import ProductCards from "../productCard/products";
 import { Container } from "../styles/Container.styled";
 import Button from "../UI/Button";
-
 import {
   DropDownContainer,
   DropDownHeader,
@@ -15,9 +15,10 @@ import {
   Wrapper,
 } from "./elements";
 
-function SingleCategory() {
+function SingleCategory({ products }) {
   const [isOpen, setIsOpen] = useState(false);
   const toggling = () => setIsOpen(!isOpen);
+  console.log(products);
   return (
     <Container>
       <Wrapper>
@@ -42,8 +43,7 @@ function SingleCategory() {
           </pricerWrapper>
         </SideBar>
         <MainWrapper>
-          <div>Category</div>
-          <div>Filter</div>
+          <ProductCards products={products} />
         </MainWrapper>
       </Wrapper>
     </Container>

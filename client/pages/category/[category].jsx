@@ -4,6 +4,7 @@ import { getCategories } from "../../api/home";
 import { getCategoryProducts } from "../../api/singleCategoryProducts";
 import SingleCategory from "../../components/category/category";
 import LoadingSkeleton from "../../components/shared/skeleton";
+import { products } from "../../data/products.json";
 import useFilter from "../../hooks/useFilter";
 
 const SingleCatProducts = ({ ProductsByCategory }) => {
@@ -19,7 +20,6 @@ const SingleCatProducts = ({ ProductsByCategory }) => {
 
   // filter products by price and categoryName
   const { data, refetch } = useFilter("category", categoryName, 500, "asc");
-  console.log(data);
 
   if (isLoading) {
     return <LoadingSkeleton />;
@@ -27,7 +27,7 @@ const SingleCatProducts = ({ ProductsByCategory }) => {
 
   return (
     <div>
-      <SingleCategory />
+      <SingleCategory products={products} heading="Category filter Products" />
     </div>
   );
 };
