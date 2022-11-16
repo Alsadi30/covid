@@ -3,20 +3,9 @@ import Link from "next/link";
 import { BsFillCartPlusFill } from "react-icons/bs";
 import styled from "styled-components";
 import { FlexCenter, FlexContentSpace } from "../styles/Flex.styled";
+import { Box } from "./product.style";
 
-const Box = styled.div`
-    // border: 1px solid #f4f4f4;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    border-radius: 7px;
-    padding: 15px;
 
-    img {
-      max-width: 100%;
-      margin-top: 15px;
-      height: 250px;
-      object-fit: cover;
-    }
-`
 
 const Product = ({ product }) => {
   const { AuthToken } = useStoreState((state) => state.Auth);

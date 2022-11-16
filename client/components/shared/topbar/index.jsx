@@ -53,6 +53,11 @@ const Topbar = () => {
   }
 
 
+  const totalCount = CartProducts.reduce((acc , curr) => {
+    return acc + curr.quentity;
+}, 0)
+
+
   return (
     <>
       <FlexContentSpace bg="#F0F2F3" padding="15px 50px">
@@ -67,7 +72,7 @@ const Topbar = () => {
         </Form>
 
         <div>
-          <Badge count={CartProducts.length} style={{marginRight: '7px'}}>
+          <Badge count={totalCount} style={{marginRight: '7px'}}>
             <button onClick={showDrawer}>
               <AiOutlineShoppingCart size="25"></AiOutlineShoppingCart>
             </button>

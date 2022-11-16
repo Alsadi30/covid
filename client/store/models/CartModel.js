@@ -62,7 +62,6 @@ const CartModel = {
   AddProduct: action((state, payload) => {
     payload.id ? (state.CartId = payload.id) : (state.CartId = '')
     state.CartProducts = [...payload.attributes.products]
-    toast('Product added to the cart', { autoClose: 100 })
   }),
   AddProductNoAuth: action((state, payload) => {
     const CartProducts = state.CartProducts
@@ -70,13 +69,11 @@ const CartModel = {
     if (isInCart === -1) {
       state.CartProducts = [...state.CartProducts, data]
     }
-    toast('Product added to the cart', { autoClose: 100 })
   }),
   RemoveProduct: action((state, payload) => {
     state.CartProducts = state.CartProducts.filter(
       product => product.productId !== payload.productId
     )
-    toast('Product Removed', { autoClose: 100 })
   }),
   AddProductThunk: thunk(
     async ({ AddProduct }, payload, { getState, getStoreState }) => {
@@ -133,7 +130,6 @@ const CartModel = {
       let data = ProductInCartDec(state.CartProducts, payload)
       state.CartProducts = data.data
     }
-    toast('Product quantity decremented', { autoClose: 100 })
   }),
 
   DecreaseProductQuantityThunk: thunk(
