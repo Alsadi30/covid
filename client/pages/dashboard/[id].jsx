@@ -8,8 +8,10 @@ import Navbar from '../../components/shared/navbar';
 import LoadingSkeleton from '../../components/shared/skeleton';
 import Topbar from '../../components/shared/topbar';
 import { Container } from '../../components/styles/Container.styled';
+import { SuccessBox } from '../../components/styles/success.style';
+
 import OrderItemTab from '../../components/table/orderItemsTab';
-import { SuccessBox } from '../success/success.style';
+
 
 function OrderDetails() {
     
