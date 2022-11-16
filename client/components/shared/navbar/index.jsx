@@ -6,33 +6,33 @@ import NavItem from './navItem';
 import { DownOutlined, SmileOutlined } from '@ant-design/icons';
 import { Avatar, Menu, Dropdown } from "antd";
 import {
-  UserOutlined,
-  SolutionOutlined,
-  LockOutlined,
-  TranslationOutlined,
-  PoweroffOutlined
+    UserOutlined,
+    SolutionOutlined,
+    LockOutlined,
+    TranslationOutlined,
+    PoweroffOutlined
 } from "@ant-design/icons";
 
 const widgetMenu = (
     <Menu>
-      <Menu.Item>
-        <SolutionOutlined className="icon" />
-        profile
-      </Menu.Item>
-      <Menu.Item>
-        <LockOutlined className="icon" />
-        change password
-      </Menu.Item>
-      <Menu.Item>
-        <TranslationOutlined className="icon" />
-        change language
-      </Menu.Item>
-      <Menu.Item>
-        <PoweroffOutlined className="icon" />
-        sign out
-      </Menu.Item>
+        <Menu.Item>
+            <SolutionOutlined className="icon" />
+            profile
+        </Menu.Item>
+        <Menu.Item>
+            <LockOutlined className="icon" />
+            change password
+        </Menu.Item>
+        <Menu.Item>
+            <TranslationOutlined className="icon" />
+            change language
+        </Menu.Item>
+        <Menu.Item>
+            <PoweroffOutlined className="icon" />
+            sign out
+        </Menu.Item>
     </Menu>
-  );
+);
 
 
 const items = ['Home', 'Products', 'Review', 'About'];
@@ -49,7 +49,7 @@ const CategoryPara = styled.a`
     ul li ul.dropdown{
         min-width: 100%; /* Set width of the dropdown */
         background: #f2f2f2;
-        display: none;
+        display: block;
         position: absolute;
         z-index: 999;
         left: 0;
@@ -81,6 +81,37 @@ const CategoryList = styled.div`
         }
 `
 
+const List = styled.ul`
+        // display: inline-block;
+        // position: relative;
+
+        width: 100%;
+        background: red;
+        position: absolute;
+        z-index: 999;
+
+        li {
+            display:none;
+            background-color: red;
+        }
+    
+`
+
+const menu2 = ({ categories }) => {
+    return (
+        <>
+            {
+                categories?.map((cat, i) =>
+                    <Menu key={i}>
+                        <Menu.Item>{
+                            cat?.attributes?.name
+                        }</Menu.Item>
+                    </Menu>)
+            }
+        </>
+    )
+}
+
 const Navbar = ({ categories }) => {
 
     return (
@@ -89,15 +120,28 @@ const Navbar = ({ categories }) => {
                 <Stack>
                     {/* <div> */}
                     <CategoryPara href="#">
-                        <Dropdown overlay={<widgetMenu />} >
-                            {/* <> */}
+                        <Dropdown overlay={
+                            <Menu >
+                                {
+                                    categories.map((cat, i) => (
+                                        <Menu.Item key={i}>{cat?.attributes?.name}</Menu.Item>
+                                    ))
+                                }
+                            </Menu>
+                        } >
+                            <Flex>
                                 <AiOutlineMenu style={{ marginRight: '7px' }}></AiOutlineMenu>
-                                {/* All Categories */}
-                            {/* </> */}
+                                All Categories
+                            </Flex>
                         </Dropdown>
 
 
                     </CategoryPara>
+
+
+
+
+
 
                     {/* </div> */}
 

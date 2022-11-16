@@ -33,30 +33,34 @@ const Cart = ({ onClose, open }) => {
             <Drawer title="Shopping Cart" placement="right" onClose={onClose} open={open}>
                 <Box style={{ height: '100%' }}>
 
-                    {
-                        CartProducts.length > 0 ?
-                            CartProducts?.map((item, i) =>
-                                <FlexStart key={i * Math.random(100)} direction="column">
-                                    <CartProduct key={i * Math.random(100)} item={item} />
-                                </FlexStart>) :
+                    <div style={{ flexGrow: 1 }}>
+                        {
+                            CartProducts.length > 0 ?
+                                CartProducts?.map((item, i) => <>
+                                    <FlexStart key={i * Math.random(100)} direction="column">
+                                        <CartProduct key={i * Math.random(100)} item={item} />
+                                    </FlexStart>
+                                </>
+                                ) :
 
-                            <FlexCenter style={{ height: '95%' }} direction="column">
-                                <EmptyCard />
-                                <h3 style={{ marginTop: '10px' }}>Your Card Is Empty</h3>
-                            </FlexCenter>
-                    }
+                                <FlexCenter style={{ height: '95%' }} direction="column">
+                                    <EmptyCard />
+                                    <h3 style={{ marginTop: '10px' }}>Your Card Is Empty</h3>
+                                </FlexCenter>
+                        }
 
+                    </div>
 
                     {Auth.AuthToken ? (
                         <Link href="/checkout">
                             {/* <FlexEnd> */}
-                                <ProceedButton>Proceed To Checkout</ProceedButton>
+                            <ProceedButton>Proceed To Checkout</ProceedButton>
                             {/* </FlexEnd> */}
                         </Link>
                     ) : (
                         <Link href="/login">
                             {/* <FlexEnd> */}
-                                <ProceedButton>Proceed To Checkout</ProceedButton>
+                            <ProceedButton>Proceed To Checkout</ProceedButton>
                             {/* </FlexEnd> */}
                         </Link>
                     )}

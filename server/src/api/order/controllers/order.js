@@ -39,7 +39,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
     const newOrder = await strapi.entityService.create('api::order.order', {
       data: {
         userId: user.id,
-        address: data.address.id,
+        address: data.address,
         sub_total: data.sub_total,
         total_price: data.total_price,
         discount: data.discount,
@@ -49,7 +49,6 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
         transaction_id: session.id
       }
     })
-    console.log(newOrder)
     return { id: session.id, newOrder }
   },
 
@@ -77,6 +76,19 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
         entries[0].id,
         {
           data: entries[0]
+        }
+      )
+
+      const payment = await strapi.entityService.create(
+        'api::payment.payment',
+        {
+          data: {
+            order: newOrder.id,
+            type: 'ONLINE',
+            status: true,
+            transaction_id: session.id,
+            publishedAt: new Date()
+          }
         }
       )
 

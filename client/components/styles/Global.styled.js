@@ -27,6 +27,11 @@ const GlobalStyles = createGlobalStyle`
   img {
     max-width: 100%;
 }
+
+.ant-dropdown-menu {
+    padding: 20px 10px !important;
+    border-radius: 5px;
+}
 `
 
 export default GlobalStyles;
