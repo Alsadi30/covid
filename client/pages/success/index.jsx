@@ -1,15 +1,15 @@
-import {useQuery} from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import Head from 'next/head';
-import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
-import styled from 'styled-components';
-import {ConfirmOrderPayment} from '../../api/checkout';
+import { ConfirmOrderPayment } from '../../api/checkout';
 import Footer from '../../components/shared/footer/footer';
 import Navbar from '../../components/shared/navbar';
 import LoadingSkeleton from '../../components/shared/skeleton';
 import Topbar from '../../components/shared/topbar';
-import {Container} from '../../components/styles/Container.styled';
-import {SuccessBox} from './success.style';
+import { Container } from '../../components/styles/Container.styled';
+import { SuccessBox } from '../../components/styles/success.style';
+
 
 const Success = () => {
   const router = useRouter ();

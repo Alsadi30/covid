@@ -8,8 +8,8 @@ import Navbar from '../../components/shared/navbar';
 import LoadingSkeleton from '../../components/shared/skeleton';
 import Topbar from '../../components/shared/topbar';
 import {Container} from '../../components/styles/Container.styled';
+import {Cards} from '../../components/styles/dashboard.style';
 import Table from '../../components/table';
-import {Cards} from './dashboard.style';
 
 const Dashboard = () => {
   const {data, isLoading} = useQuery ({
