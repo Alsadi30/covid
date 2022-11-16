@@ -4,42 +4,35 @@ import { Flex, FlexContentAround, Stack } from '../../styles/Flex.styled';
 import { AiOutlineMenu } from 'react-icons/ai';
 import NavItem from './navItem';
 import { DownOutlined, SmileOutlined } from '@ant-design/icons';
-import { Dropdown, Space } from 'antd';
+import { Avatar, Menu, Dropdown } from "antd";
+import {
+    UserOutlined,
+    SolutionOutlined,
+    LockOutlined,
+    TranslationOutlined,
+    PoweroffOutlined
+} from "@ant-design/icons";
 
-const items2 = [
-    {
-        key: '1',
-        label: (
-            <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-                1st menu item
-            </a>
-        ),
-    },
-    {
-        key: '2',
-        label: (
-            <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
-                2nd menu item (disabled)
-            </a>
-        ),
-        icon: <SmileOutlined />,
-        disabled: true,
-    },
-    {
-        key: '3',
-        label: (
-            <a target="_blank" rel="noopener noreferrer" href="https://www.luohanacademy.com">
-                3rd menu item (disabled)
-            </a>
-        ),
-        disabled: true,
-    },
-    {
-        key: '4',
-        danger: true,
-        label: 'a danger item',
-    },
-];
+const widgetMenu = (
+    <Menu>
+        <Menu.Item>
+            <SolutionOutlined className="icon" />
+            profile
+        </Menu.Item>
+        <Menu.Item>
+            <LockOutlined className="icon" />
+            change password
+        </Menu.Item>
+        <Menu.Item>
+            <TranslationOutlined className="icon" />
+            change language
+        </Menu.Item>
+        <Menu.Item>
+            <PoweroffOutlined className="icon" />
+            sign out
+        </Menu.Item>
+    </Menu>
+);
 
 
 const items = ['Home', 'Products', 'Review', 'About'];
@@ -56,7 +49,7 @@ const CategoryPara = styled.a`
     ul li ul.dropdown{
         min-width: 100%; /* Set width of the dropdown */
         background: #f2f2f2;
-        display: none;
+        display: block;
         position: absolute;
         z-index: 999;
         left: 0;
@@ -86,14 +79,40 @@ const CategoryList = styled.div`
         a {
             padding: 5px 3px;
         }
-
-        
-
-
 `
 
+const List = styled.ul`
+        // display: inline-block;
+        // position: relative;
+
+        width: 100%;
+        background: red;
+        position: absolute;
+        z-index: 999;
+
+        li {
+            display:none;
+            background-color: red;
+        }
+    
+`
+
+const menu2 = ({ categories }) => {
+    return (
+        <>
+            {
+                categories?.map((cat, i) =>
+                    <Menu key={i}>
+                        <Menu.Item>{
+                            cat?.attributes?.name
+                        }</Menu.Item>
+                    </Menu>)
+            }
+        </>
+    )
+}
+
 const Navbar = ({ categories }) => {
-    console.log(categories, 'categories');
 
     return (
         <>
@@ -101,15 +120,28 @@ const Navbar = ({ categories }) => {
                 <Stack>
                     {/* <div> */}
                     <CategoryPara href="#">
-                        <Dropdown menu={{ items2 }}>
-                            <>
+                        <Dropdown overlay={
+                            <Menu >
+                                {
+                                    categories.map((cat, i) => (
+                                        <Menu.Item key={i}>{cat?.attributes?.name}</Menu.Item>
+                                    ))
+                                }
+                            </Menu>
+                        } >
+                            <Flex>
                                 <AiOutlineMenu style={{ marginRight: '7px' }}></AiOutlineMenu>
                                 All Categories
-                            </>
+                            </Flex>
                         </Dropdown>
 
 
                     </CategoryPara>
+
+
+
+
+
 
                     {/* </div> */}
 

@@ -9,13 +9,21 @@ const Box = styled.div`
   border-radius: 7px;
   padding: 15px;
 
-  img {
-    max-width: 100%;
-    margin-top: 15px;
-    height: 250px;
-    object-fit: cover;
-  }
-`;
+    img {
+      max-width: 100%;
+      margin-top: 15px;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    button {
+      transition: all 0.3s ease;
+    }
+
+    button:active {
+      scale: 1.2;
+    }
+`
 
 const Product = ({ product }) => {
   const { AuthToken } = useStoreState((state) => state.Auth);
