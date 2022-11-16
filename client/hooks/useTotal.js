@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 import { getCoupon } from '../api/checkout'
 
 const useTotal = cart => {
@@ -21,17 +22,17 @@ const useTotal = cart => {
     onSuccess: data => {
       let date1 = new Date()
 
-      if (date1.toISOString() <= data[0].attributes.validity) {
+      if (date1.toISOString() <= data[0]?.attributes.validity) {
         let discount = (subTotal * parseInt(data[0].attributes.value)) / 100
-        console.log(discount)
         setDiscount(discount)
       } else {
         setError('Coupon is Expired')
+        toast('Coupon is Expired')
       }
     },
     onError: error => {
-      console.log(error)
       setError(error.message)
+      toast(error.message)
     }
   })
 

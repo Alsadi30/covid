@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { toast } from 'react-toastify'
 import { backend_base_api } from './api'
 
 export const createCartApi = async (data, id) => {
@@ -7,7 +8,7 @@ export const createCartApi = async (data, id) => {
     const Cart = await axios.post(`${backend_base_api}/carts`, Data)
     return Cart
   } catch (e) {
-    console.log(e)
+    toast(e.message)
   }
 }
 
@@ -17,7 +18,7 @@ export const updateCartApi = async (data, cartId) => {
     const Cart = await axios.put(`${backend_base_api}/carts/${cartId}`, Data)
     return Cart
   } catch (e) {
-    console.log(e)
+    toast(e.message)
   }
 }
 
@@ -27,7 +28,7 @@ export const getCartofUser = async () => {
     let cart = res.data[0]
     return cart
   } catch (e) {
-    console.log(e)
+    toast(e.message)
   }
 }
 
@@ -35,9 +36,8 @@ export const deleteCart = async cartId => {
   try {
     let res = await axios.delete(`${backend_base_api}/carts/${cartId}`)
     let cart = res.data
-    console.log(cart)
     return cart
   } catch (e) {
-    console.log(e)
+    toast(e.message)
   }
 }

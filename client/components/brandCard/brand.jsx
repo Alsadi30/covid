@@ -7,15 +7,18 @@ const Box = styled.div`
         height: 80px;
         object-fit: cover;
     }
-`
+`;
 
-const Brand = ({ brand }) => {
-    return (
-        <Box>
-            <img src={brand.attributes.avater.data.attributes.url} alt={brand?.attributes.name}></img>
-            <p>{ brand.attributes.name }</p>
-        </Box>
-    );
+const Brand = ({brand}) => {
+  return (
+    <Box>
+      <img
+        src={brand?.attributes.avater.data.attributes.url}
+        alt={brand?.attributes.name}
+      />
+      {/* <p>{ brand.attributes.name }</p> */}
+    </Box>
+  );
 };
 
 export default Brand;

@@ -1,4 +1,5 @@
 import { action, thunk } from 'easy-peasy'
+import { toast } from 'react-toastify'
 import { setAuthToken } from '../../api/api'
 import { LoginApi, RegisterApi } from '../../api/auth'
 
@@ -14,21 +15,30 @@ const AuthModel = {
     state.AuthUser = {}
   }),
   LogIn: thunk(async ({ AuthSet }, payload) => {
-    const data = await LoginApi(payload)
-    AuthSet({ ...data })
-    if (data) {
-      setAuthToken(data.token)
+    try {
+      const data = await LoginApi(payload)
+      AuthSet({ ...data })
+      if (data) {
+        setAuthToken(data.token)
+      }
+      return !!data
+    } catch (e) {
+      // toast(e.message)
     }
-    return !!data
   }),
 
   Register: thunk(async ({ AuthSet }, payload) => {
-    const data = await RegisterApi(payload)
-    AuthSet({ ...data })
-    if (data.token) {
-      setAuthToken(data.token)
+    try {
+      const data = await RegisterApi(payload)
+      AuthSet({ ...data })
+      if (data.token) {
+        setAuthToken(data.token)
+      }
+      toast('Account Created Successfully!')
+      return !!data
+    } catch (e) {
+      toast(e.message)
     }
-    return !!data
   })
 }
 export default AuthModel

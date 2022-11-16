@@ -1,4 +1,4 @@
-const NavItem = ({ item }) => {
+const NavItem = ({item}) => {
   return <a href={`#${item}`}>{item}</a>;
 };
 

@@ -3,43 +3,53 @@ import {
   ProductContent,
   ProductTitle,
   ProductWrapper,
-} from "../productCard/singleProductElements";
-import { Container } from "../styles/Container.styled";
-import Button from "../UI/Button";
-import RelatedProduct from "./relatedProduct";
-import { ProductSlide } from "./singleProductSlider";
-function SingleProductCard() {
+} from '../productCard/singleProductElements';
+import {Container} from '../styles/Container.styled';
+import Button from '../UI/Button';
+import RelatedProduct from './relatedProduct';
+import {ProductSlide} from './singleProductSlider';
+function SingleProductCard({product}) {
   return (
-    <>
+    <div>
       <ProductWrapper>
-        <div style={{ width: "500px" }}>
+        <div style={{width: '500px'}}>
           <img
-            src="https://dummyjson.com/image/i/products/1/thumbnail.jpg"
-            alt=""
+            src={product.attributes.thumbnails.data[0].attributes.url}
+            alt={product?.attributes.name}
           />
           <ProductSlide />
         </div>
         <ProductContent>
-          <strong>Laptop</strong>
-          <ProductTitle>Dell Laptop 234HP</ProductTitle>
+          {/* <strong>{product.attributes.name}</strong> */}
+          <ProductTitle>{product.attributes.name}</ProductTitle>
+
           <p>
-            Brand: <strong>Dell</strong>
+            {product.attributes.variants.data[0].attributes.description}
           </p>
           <p>
-            An apple mobile which is nothing like apple, Lorem ipsum dolor sit
-            amet, consectetur adipisicing elit. Esse, fugiat!
+            $
+            {product.attributes.variants.data[0].attributes.sale_price
+              ? product.attributes.variants.data[0].attributes.sale_price
+              : product.attributes.variants.data[0].attributes.regular_price}
           </p>
-          <Input type="number" />
+          <div>
+            {product.attributes.variants.data[0].attributes.attr.name}
+            {' '}
+            :
+            {' '}
+            {product.attributes.variants.data[0].attributes.attr.value}
+          </div>
+          {/* <Input type="number" /> */}
           <div>
             <Button>Add To Card</Button>
-            <Button>Boy Now</Button>
+            <Button>Buy Now</Button>
           </div>
         </ProductContent>
       </ProductWrapper>
       <Container>
         <RelatedProduct />
       </Container>
-    </>
+    </div>
   );
 }
 

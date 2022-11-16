@@ -55,9 +55,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
   async confirm (ctx) {
     const { transaction_id } = ctx.request.body.data
 
-    console.log('checkout_session', transaction_id)
     const session = await stripe.checkout.sessions.retrieve(transaction_id)
-    console.log('verify session', session)
 
     if (session.payment_status === 'paid') {
       //Update order

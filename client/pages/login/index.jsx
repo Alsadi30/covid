@@ -1,17 +1,15 @@
+import { useStoreActions } from "easy-peasy";
 import Head from "next/head";
+import Link from 'next/link';
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import Navbar from "../../components/shared/navbar";
 import Topbar from "../../components/shared/topbar";
 import { AuthBox, Container } from "../../components/styles/Container.styled";
-import { Flex, FlexCenter } from "../../components/styles/Flex.styled";
+import { FlexCenter } from "../../components/styles/Flex.styled";
 import ButtonInput from "../../components/UI/ButtonInput";
-import TextInput from "../../components/UI/TextInput";
-import { BsArrowRight } from 'react-icons/bs';
-import styled from "styled-components";
 import { Error } from "../../components/UI/Error";
-import Link from 'next/link';
-import {useStoreActions, useStoreState} from "easy-peasy";
-import {useRouter} from "next/router";
+import TextInput from "../../components/UI/TextInput";
 
 
 const Login = () => {

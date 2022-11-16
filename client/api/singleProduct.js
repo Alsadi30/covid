@@ -9,7 +9,7 @@ export const getSingleProduct = async slug => {
     const product = res.data.data
     return product
   } catch (e) {
-    console.log(e)
+    toast(e.message)
   }
 }
 
@@ -19,6 +19,6 @@ export const getAllProducts = async () => {
     const products = res.data.data
     return products
   } catch (e) {
-    console.log(e)
+    toast(e.message)
   }
 }

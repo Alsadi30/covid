@@ -1,18 +1,16 @@
+import { useStoreActions } from "easy-peasy";
 import Head from "next/head";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import Navbar from "../../components/shared/navbar";
 import Topbar from "../../components/shared/topbar";
 import { AuthBox, Container } from "../../components/styles/Container.styled";
 import { FlexCenter } from "../../components/styles/Flex.styled";
 import ButtonInput from "../../components/UI/ButtonInput";
-import TextInput from "../../components/UI/TextInput";
-import { BsArrowRight } from "react-icons/bs";
-import styled from "styled-components";
 import { Error } from "../../components/UI/Error";
-import { AuthBackEndApi } from "../../api/api";
-import { useRouter } from "next/router";
-import { useStoreActions } from "easy-peasy";
-import Link from "next/link";
+import TextInput from "../../components/UI/TextInput";
 
 const Register = () => {
   const router = useRouter();
@@ -27,7 +25,7 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     if (data.password !== data.confirmPassword) {
-      console.log("Passwords don't match");
+       toast('Password does Not Match')
     } else {
       (await Register(data)) && router.push("/");
     }

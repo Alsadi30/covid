@@ -4,12 +4,12 @@ import { backend_base_api } from './api'
 export const getCategoryProducts = async categoryName => {
   try {
     const res = await axios.get(
-      `${backend_base_api}/categories?filters[name][$eq]=${categoryName}&populate[0]=products`
+      `${backend_base_api}/products?populate[0]=category&populate[1]=variants&populate[2]=thumbnails&filters[category][name][$eq]=${categoryName}`
     )
     const products = res.data.data
     return products
   } catch (e) {
-    console.log(e)
+    toast(e.message)
   }
 }
 
@@ -21,6 +21,6 @@ export const getProducts = async (baseField, baseFieldValue, price, sort) => {
     const products = res.data.data
     return products
   } catch (e) {
-    console.log(e)
+    toast(e.message)
   }
 }

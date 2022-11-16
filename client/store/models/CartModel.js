@@ -1,4 +1,5 @@
 import { action, thunk } from 'easy-peasy'
+import { toast } from 'react-toastify'
 import { createCartApi, deleteCart, updateCartApi } from '../../api/cart'
 
 const CheckInCartInc = (CartProducts, payload) => {
@@ -7,7 +8,7 @@ const CheckInCartInc = (CartProducts, payload) => {
   })
 
   let data = {}
-  console.log(payload)
+
   if (isInCart === -1) {
     data = {
       productId: payload.productId,
@@ -30,14 +31,12 @@ const CheckInCartInc = (CartProducts, payload) => {
         return product
       }
     })
-    console.log(data)
   }
 
   return { data, isInCart }
 }
 
 const ProductInCartDec = (CartProducts, payload) => {
-  console.log(payload.productId)
   const isInCart = CartProducts.findIndex(product => {
     return product.productId === payload.productId
   })
@@ -61,9 +60,9 @@ const CartModel = {
   CartId: '',
   CartProducts: [],
   AddProduct: action((state, payload) => {
-    console.log(payload.attributes.products)
     payload.id ? (state.CartId = payload.id) : (state.CartId = '')
     state.CartProducts = [...payload.attributes.products]
+    toast('Product added to the cart', { autoClose: 100 })
   }),
   AddProductNoAuth: action((state, payload) => {
     const CartProducts = state.CartProducts
@@ -71,11 +70,13 @@ const CartModel = {
     if (isInCart === -1) {
       state.CartProducts = [...state.CartProducts, data]
     }
+    toast('Product added to the cart', { autoClose: 100 })
   }),
   RemoveProduct: action((state, payload) => {
     state.CartProducts = state.CartProducts.filter(
       product => product.productId !== payload.productId
     )
+    toast('Product Removed', { autoClose: 100 })
   }),
   AddProductThunk: thunk(
     async ({ AddProduct }, payload, { getState, getStoreState }) => {
@@ -90,7 +91,7 @@ const CartModel = {
           const createdCart = await createCartApi(data, userId)
           AddProduct(createdCart.data.data)
         } catch (e) {
-          console.log(e)
+          toast(e.message)
         }
       } else {
         try {
@@ -103,7 +104,7 @@ const CartModel = {
             AddProduct(updatedCart.data.data)
           }
         } catch (e) {
-          console.log(e)
+          toast(e.message)
         }
       }
     }
@@ -115,7 +116,7 @@ const CartModel = {
       try {
         updateCartApi(CartProducts, CartId)
       } catch (e) {
-        console.log(e)
+        toast(e.message)
       }
     }
   ),
@@ -129,10 +130,10 @@ const CartModel = {
         product => product.productId !== payload.productId
       )
     } else {
-      console.log(state.CartProducts)
       let data = ProductInCartDec(state.CartProducts, payload)
       state.CartProducts = data.data
     }
+    toast('Product quantity decremented', { autoClose: 100 })
   }),
 
   DecreaseProductQuantityThunk: thunk(
@@ -145,7 +146,7 @@ const CartModel = {
       const CartProducts = getState().CartProducts
 
       let { data, isInCart } = ProductInCartDec(CartProducts, payload)
-      console.log(data)
+
       let product = CartProducts.find(
         item => item.productId === payload.productId
       )
@@ -158,30 +159,18 @@ const CartModel = {
       } else {
         if (!cartId) {
           try {
-            console.log('call from no cart id')
             let userId = getStoreState().Auth.AuthUser.id
             const createdCart = await createCartApi(data, userId)
             AddProduct(createdCart.data.data)
           } catch (e) {
-            console.log(e)
+            toast(e.message)
           }
         } else {
           try {
-            // if (isInCart !== -1) {
-            console.log('call from has cart id and has in cart')
             const updatedCart = await updateCartApi(data, cartId)
             AddProduct(updatedCart.data.data)
-            console.log(updatedCart.data.data)
-            // } else {
-            // console.log('call from has cart id but not in cart')
-            // const Data = [...CartProducts, data]
-            // console.log(Data)
-            // const updatedCart = await updateCartApi(Data, cartId)
-
-            // AddProduct(updatedCart.data.data)
-            // }
           } catch (e) {
-            console.log(e)
+            toast(e.message)
           }
         }
       }
@@ -191,7 +180,6 @@ const CartModel = {
   SetDatabaseCart: action((state, payload) => {
     state.CartId = payload.id
     state.CartProducts = payload.products
-    console.log(payload)
   }),
 
   ClearCart: action(state => {

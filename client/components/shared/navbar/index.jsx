@@ -93,7 +93,7 @@ const CategoryList = styled.div`
 `
 
 const Navbar = ({ categories }) => {
-    console.log(categories, 'categories');
+  
 
     return (
         <>

@@ -9,8 +9,7 @@ export const getProducts = async () => {
     const products = res.data.data
     return products
   } catch (e) {
-    console.log(e)
-    return e
+    toast(e.message)
   }
 }
 
@@ -20,7 +19,7 @@ export const getCategories = async () => {
     const categories = res.data.data
     return categories
   } catch (e) {
-    console.log(e)
+    toast(e.message)
   }
 }
 
@@ -30,7 +29,7 @@ export const getBrands = async () => {
     const brands = res.data.data
     return brands
   } catch (e) {
-    console.log(e)
+    toast(e.message)
   }
 }
 
@@ -42,7 +41,7 @@ export const getFilterdProducts = async url => {
     const products = res.data.data
     return products
   } catch (e) {
-    console.log(e)
+    toast(e.message)
   }
 }
 
@@ -54,7 +53,6 @@ export const getLatestProducts = async () => {
     const products = res.data.data
     return products
   } catch (e) {
-    console.log(e)
-    return e
+    toast(e.message)
   }
 }

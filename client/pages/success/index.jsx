@@ -1,27 +1,30 @@
 import {useQuery} from '@tanstack/react-query';
-import axios from 'axios';
 import Head from 'next/head';
 import {useRouter} from 'next/router';
-import {backend_base_api} from '../../api/api';
-import { ConfirmOrderPayment } from '../../api/checkout';
+import { toast } from 'react-toastify';
+import styled from 'styled-components';
+import {ConfirmOrderPayment} from '../../api/checkout';
 import Footer from '../../components/shared/footer/footer';
 import Navbar from '../../components/shared/navbar';
+import LoadingSkeleton from '../../components/shared/skeleton';
 import Topbar from '../../components/shared/topbar';
 import {Container} from '../../components/styles/Container.styled';
-
-
+import {SuccessBox} from './success.style';
 
 const Success = () => {
   const router = useRouter ();
   const {session_id} = router.query;
 
-  const {data: order, isLoading: isLoading2} = useQuery ({
+  const {data: order, isLoading} = useQuery ({
     queryKey: ['order', session_id],
-    queryFn: () => ConfirmOrderPayment (session_id),
+    queryFn: () => ConfirmOrderPayment(session_id),
+    onSuccess:()=> toast('Order Placed Successfully')
   });
-    
-    console.log(order)
 
+  if (isLoading) {
+    return <LoadingSkeleton />;
+  }
+ 
   return (
     <>
       <Head>
@@ -32,7 +35,20 @@ const Success = () => {
       <Topbar />
       <Container>
         <Navbar />
-        
+        {order
+          ? <SuccessBox>
+              <h2>Your Order Has Been Successfully Placed!</h2>
+              <p>Order ID : {order.id} </p>
+              <p>Transaction ID : {order.transaction_id}</p>
+              <p>Subtotal : {order.sub_total}</p>
+              <p>Discount: {order.discount}</p>
+              <p>Total : {order.total_price}</p>
+              <p>Order Status : Panding</p>
+              <p>Payment Status : {order.status}</p>
+              <p>Delivery Status : Not yet delivered </p>
+            </SuccessBox>
+          : ''}
+
       </Container>
       <Footer />
     </>

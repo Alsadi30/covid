@@ -1,12 +1,16 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  margin: 20px 0px;
+  margin: 0px 0px;
   display: flex;
+  max-width:100%;
 `;
 
 export const SideBar = styled.div`
-  width: 300px;
+// border: 1px solid;
+height:100%;
+margin-top:60px;
+  width: 20%;
   height: 100%;
 `;
 
@@ -16,12 +20,12 @@ export const SidebarTitle = styled.h1`
   text-color: #272343;
 `;
 
-export const DropDownContainer = styled("div")`
+export const DropDownContainer = styled ('div')`
   width: 10.5em;
   margin: 0 0;
 `;
 
-export const DropDownHeader = styled("div")`
+export const DropDownHeader = styled ('div')`
   margin-bottom: 0.8em;
   padding: 0.4em 2em 0.4em 1em;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
@@ -32,9 +36,9 @@ export const DropDownHeader = styled("div")`
   cursor: pointer;
 `;
 
-export const DropDownListContainer = styled("div")``;
+export const DropDownListContainer = styled ('div')``;
 
-export const DropDownList = styled("ul")`
+export const DropDownList = styled ('ul')`
   padding: 0;
   margin: 0;
   padding-left: 1em;
@@ -48,13 +52,13 @@ export const DropDownList = styled("ul")`
   }
 `;
 
-export const ListItem = styled("li")`
+export const ListItem = styled ('li')`
   list-style: none;
   margin-bottom: 0.8em;
   cursor: pointer;
 `;
 
-export const pricerWrapper = styled.div`
+export const PricerWrapper = styled.div`
   dislplay: flex;
 `;
 

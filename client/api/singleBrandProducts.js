@@ -9,6 +9,6 @@ export const getBrandProducts = async brandName => {
     const products = res.data.data
     return products
   } catch (e) {
-    console.log(e)
+    toast(e.message)
   }
 }
