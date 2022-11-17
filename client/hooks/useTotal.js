@@ -22,6 +22,10 @@ const useTotal = cart => {
     onSuccess: data => {
       let date1 = new Date()
 
+      if (!data[0]) {
+        return toast('NO Coupon Found')
+      }
+
       if (date1.toISOString() <= data[0]?.attributes.validity) {
         let discount = (subTotal * parseInt(data[0].attributes.value)) / 100
         setDiscount(discount)
@@ -32,7 +36,7 @@ const useTotal = cart => {
     },
     onError: error => {
       setError(error.message)
-      toast(error.message)
+      toast(error.response.data.error.message)
     }
   })
 

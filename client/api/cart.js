@@ -8,7 +8,7 @@ export const createCartApi = async (data, id) => {
     const Cart = await axios.post(`${backend_base_api}/carts`, Data)
     return Cart
   } catch (e) {
-    toast(e.message)
+    toast(e.response.data.error.message)
   }
 }
 
@@ -18,7 +18,7 @@ export const updateCartApi = async (data, cartId) => {
     const Cart = await axios.put(`${backend_base_api}/carts/${cartId}`, Data)
     return Cart
   } catch (e) {
-    toast(e.message)
+    toast(e.response.data.error.message)
   }
 }
 
@@ -38,6 +38,6 @@ export const deleteCart = async cartId => {
     let cart = res.data
     return cart
   } catch (e) {
-    toast(e.message)
+    toast(e.response.data.error.message)
   }
 }

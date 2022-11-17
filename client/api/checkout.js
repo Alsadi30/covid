@@ -10,7 +10,7 @@ export const createAddress = async (data, userId) => {
     })
     return Address
   } catch (e) {
-    toast(e.message)
+    toast(e.response.data.error.message)
   }
 }
 
@@ -20,7 +20,7 @@ export const createOrder = async (data, userId) => {
     const Order = await axios.post(`${backend_base_api}/orders`, { data: Data })
     return Order
   } catch (e) {
-    toast(e.message)
+    toast(e.response.data.error.message)
   }
 }
 
@@ -32,7 +32,7 @@ export const getCoupon = async data => {
     const discount = res.data.data
     return discount
   } catch (error) {
-    toast(e.message)
+    toast(e.response.data.error.message)
   }
 }
 
@@ -41,7 +41,7 @@ export const handleBuy = async data => {
     const res = await axios.post(`${backend_base_api}/orders`, data)
     return res.data
   } catch (e) {
-    toast(e.message)
+    toast(e.response.data.error.message)
   }
 }
 
@@ -50,7 +50,7 @@ export const createOrderItem = async data => {
     const res = await axios.post(`${backend_base_api}/order-items`, data)
     return res.data
   } catch (e) {
-    toast(e.message)
+    toast(e.response.data.error.message)
   }
 }
 

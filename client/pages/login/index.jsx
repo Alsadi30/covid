@@ -43,7 +43,7 @@ const Login = () => {
                 <FlexCenter>
 
                     <AuthBox onSubmit={handleSubmit(onSubmit)}>
-                        <TextInput {...register("email", { required: "Email is Required." })} placeholder="Email" type="text" />
+                        <TextInput {...register("email", { required: "Email is Required."})} placeholder="Email" type="text" />
                         {errors.email && <Error>Email or User Name is required</Error>}
 
                         <TextInput {...register("password", { required: "Password is Required." })} placeholder="Password" type="password" />

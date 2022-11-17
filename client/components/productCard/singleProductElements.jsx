@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ProductWrapper = styled.div`
   padding: 80px 150px;
@@ -7,15 +7,13 @@ export const ProductWrapper = styled.div`
 `;
 
 export const ProductContent = styled.div`
-  strong {
-    font-size: 14px;
-  }
   h1 {
     font-size: 20px;
   }
-  p {
-    padding: 5px 0px;
-    font-size: 16px;
+ 
+  div select{
+    padding: 10px 0px;
+    margin:10px;
   }
 `;
 

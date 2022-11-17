@@ -20,6 +20,6 @@ export const getSingleOrder = async id => {
     const order = res.data.data
     return order
   } catch (e) {
-    toast(e.message)
+    toast(e.response.data.error.message)
   }
 }

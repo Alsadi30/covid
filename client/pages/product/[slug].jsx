@@ -4,6 +4,7 @@ import {useRouter} from 'next/router';
 import {getAllProducts, getSingleProduct} from '../../api/singleProduct';
 import SingleProductCard from '../../components/productCard/singleProduct';
 import Footer from '../../components/shared/footer/footer';
+import GlobalCart from '../../components/shared/globalCart/GlobalCart';
 import Navbar from '../../components/shared/navbar';
 import LoadingSkeleton from '../../components/shared/skeleton';
 import Topbar from '../../components/shared/topbar';
@@ -35,6 +36,7 @@ const SingleProduct = ({product}) => {
         <Navbar />
         <SingleProductCard product={Product[0]} />
       </Container>
+      <GlobalCart />
       <Footer />
 
     </>

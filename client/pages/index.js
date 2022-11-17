@@ -82,7 +82,7 @@ export default function Home ({ saleProducts, latestProducts }) {
         <ProductCards products={latestProd} heading={'Latest Products'} />
         <ReviewCards />
       </Container>
-      <GlobalCart></GlobalCart>
+      <GlobalCart />
       <Footer></Footer>
     </Box>
   )

@@ -30,6 +30,7 @@ const AuthModel = {
   Register: thunk(async ({ AuthSet }, payload) => {
     try {
       const data = await RegisterApi(payload)
+      console.log(data)
       AuthSet({ ...data })
       if (data.token) {
         setAuthToken(data.token)

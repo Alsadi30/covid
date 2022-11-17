@@ -9,7 +9,7 @@ export const getCategoryProducts = async categoryName => {
     const products = res.data.data
     return products
   } catch (e) {
-    toast(e.message)
+    toast(e.response.data.error.message)
   }
 }
 
@@ -21,6 +21,6 @@ export const getProducts = async (baseField, baseFieldValue, price, sort) => {
     const products = res.data.data
     return products
   } catch (e) {
-    toast(e.message)
+    toast(e.response.data.error.message)
   }
 }

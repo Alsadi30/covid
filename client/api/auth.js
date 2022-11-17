@@ -11,7 +11,8 @@ export const LoginApi = data => {
       return { token: r.data.jwt, user: r.data.user }
     })
     .catch(e => {
-      toast(e.message)
+      console.log(e)
+      toast(e.response.data.error.message)
     })
 }
 
@@ -26,6 +27,7 @@ export const RegisterApi = data => {
     })
     .catch(e => {
       // add toast
-      toast(e.message)
+      console.log(e)
+      toast(e.response.data.error.message)
     })
 }

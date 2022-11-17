@@ -44,12 +44,12 @@ const Register = () => {
 
         <FlexCenter>
           <AuthBox onSubmit={handleSubmit(onSubmit)}>
-            <TextInput
+          <TextInput
               {...register("name", { required: "Name is Required." })}
               placeholder="Name"
               type="text"
             />
-            {errors.email && <Error>Name is required</Error>}
+            {errors.name && <Error>Name is required</Error>}
 
             <TextInput
               {...register("email", { required: "Email is Required." })}
@@ -63,7 +63,7 @@ const Register = () => {
               placeholder="Phone"
               type="text"
             />
-            {errors.email && <Error>Email is required</Error>}
+            {errors.phone && <Error>Phone is required</Error>}
 
             <TextInput
               {...register("password", { required: "Password is Required." })}
@@ -74,12 +74,12 @@ const Register = () => {
 
             <TextInput
               {...register("confirmPassword", {
-                required: "Password is Required.",
+                required: "Confirm Password is Required.",
               })}
               placeholder="Confirm Password"
               type="password"
             />
-            {errors.password && <Error>Password is required</Error>}
+            {errors.confirmPassword && <Error>Confirm Password is required</Error>}
 
             <ButtonInput type="submit" value={`REGISTER`} />
 

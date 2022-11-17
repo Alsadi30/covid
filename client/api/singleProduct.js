@@ -19,6 +19,6 @@ export const getAllProducts = async () => {
     const products = res.data.data
     return products
   } catch (e) {
-    toast(e.message)
+    toast(e.response.data.error.message)
   }
 }
