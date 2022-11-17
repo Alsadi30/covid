@@ -28,7 +28,7 @@ export const getCartofUser = async () => {
     let cart = res.data[0]
     return cart
   } catch (e) {
-    toast(e.message)
+    // toast(e.message)
   }
 }
 

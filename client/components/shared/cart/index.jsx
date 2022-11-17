@@ -38,7 +38,7 @@ const Cart = ({ onClose, open }) => {
                             CartProducts.length > 0 ?
                                 CartProducts?.map((item, i) => <>
                                     <FlexStart key={i * Math.random(100)} direction="column">
-                                        <CartProduct key={i * Math.random(100)} item={item} />
+                                        <CartProduct key={i * Math.random(1000)} item={item} />
                                     </FlexStart>
                                 </>
                                 ) :

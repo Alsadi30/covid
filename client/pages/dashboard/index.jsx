@@ -1,4 +1,5 @@
 import {useQuery} from '@tanstack/react-query';
+import {useStoreState} from 'easy-peasy';
 import Head from 'next/head';
 import {useState} from 'react';
 import {getOrders} from '../../api/order';
@@ -12,16 +13,23 @@ import {Cards} from '../../components/styles/dashboard.style';
 import Table from '../../components/table';
 
 const Dashboard = () => {
+  const {AuthUser} = useStoreState (state => state.Auth);
+  let id = AuthUser.id;
   const {data, isLoading} = useQuery ({
-    queryKey: ['orders'],
-    queryFn: getOrders,
+    queryKey: ['orders', id],
+    queryFn: () => getOrders (id),
   });
 
   const [field, setField] = useState ();
 
+  if (!id) {
+    return <h1 style={{display: 'center'}}> Please Login First</h1>;
+  }
+
   if (isLoading) {
     return <LoadingSkeleton />;
   }
+
   const total = data.length;
   let pending = 0;
   let delivered = 0;
@@ -69,7 +77,7 @@ const Dashboard = () => {
           <DashboardCard setField={setField} head="Pending" count={pending} />
         </Cards>
         <div>
-          {filteredData.length > 1 ? <Table data={filteredData} /> : ''}
+          {filteredData.length > 0 ? <Table data={filteredData} /> : ''}
         </div>
 
       </Container>

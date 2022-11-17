@@ -18,10 +18,10 @@ const OrderItems = ({items, subTotal, discount, total, checkCoupon}) => {
   return (
     <OrderItemsFrame>
       <ul>
-        {items.map (item => {
+        {items.map ((item, i) => {
           return (
             <li div key={item.id}>
-              <CartProduct item={item} />
+              <CartProduct key={i * Math.random (100)} item={item} />
             </li>
           );
         })}

@@ -2,10 +2,10 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import { backend_base_api } from './api'
 
-export const getOrders = async () => {
+export const getOrders = async id => {
   try {
     const res = await axios.get(
-      `${backend_base_api}/orders?sort[0]=createdAt%3Adesc`
+      `${backend_base_api}/orders?populate[0]=userId&filters[userId][id][$eq]=${id}&sort[0]=createdAt%3Adesc`
     )
     const orders = res.data.data
     return orders

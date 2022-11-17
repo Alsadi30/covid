@@ -97,5 +97,6 @@ export const getStaticProps = async () => {
     }
   } catch (error) {
     toast(error.message)
+    return errror
   }
 }

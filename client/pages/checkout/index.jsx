@@ -124,6 +124,12 @@ const Checkout = () => {
     mutate (data, Auth.AuthUser.id);
   };
 
+  
+  if (!Auth.AuthUser.id) {
+    return <h1 style={{display: 'center'}}> Please Login First</h1>;
+  }
+
+
   if (isLoading || isLoading2) {
     return <LoadingSkeleton />;
   }

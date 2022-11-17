@@ -13,7 +13,7 @@ import Link from 'next/link';
 
 const Table = ({data}) => {
   const head = ['OrderID', 'OrderTime', 'Status', 'Payment', 'Total', 'Action'];
-
+  console.log (data);
   return (
     <STable>
       <STHead>

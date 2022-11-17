@@ -43,7 +43,7 @@ const menu2 = ({ categories }) => {
             {
                 categories.map((cat, i) =>
                     <Menu key={i}>
-                        <Menu.Item>{
+                        <Menu.Item key={i * Math.random(100)}>{
                             cat.attributes.name
                         }</Menu.Item>
                     </Menu>)
@@ -70,8 +70,8 @@ const Navbar = () => {
                                 {
                                 categories?.map((cat, i) => {
                                     return (
-                                        <a href={`/category/${cat.attributes.name}`}>
-                                            <Menu.Item key={i}>{cat.attributes?.name}</Menu.Item>
+                                        <a key={i * Math.random(100)} href={`/category/${cat.attributes.name}`}>
+                                            <Menu.Item key={i*Math.random(100)}>{cat.attributes?.name}</Menu.Item>
                                         </a>
                                     );
                                 })
